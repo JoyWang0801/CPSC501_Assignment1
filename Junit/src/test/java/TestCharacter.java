@@ -269,4 +269,26 @@ public class TestCharacter {
             assertEquals(msg, attack - 1,  currentCharacter.getMaxAttack());
         }
     }
+
+
+    @Test
+    public void testAttackAction()
+    {
+        for(int i = 0; i < character_list.size() - 1; i++)
+        {
+            Chara attackter = character_list.get(i);
+            Chara victim = character_list.get( (i + 1) % character_list.size());
+            String msg = attackter.getName() + " attacks " + victim.getName();
+
+            int attacker_health = attackter.getHealth();
+            int attacker_attack = attackter.getAttack();
+            int victim_health = victim.getHealth();
+            attackter.attack(victim);
+
+            System.out.println(victim_health - attacker_attack);
+
+            assertEquals(msg, victim_health - attacker_attack, victim.getHealth());
+            assertEquals(msg, victim_health - victim.getHealth(), attacker_attack);
+        }
+    }
 }

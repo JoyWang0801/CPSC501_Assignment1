@@ -17,7 +17,7 @@ public class TestCharacter {
     @BeforeClass
     public static void SetUpClass()
     {
-        character_list  = new ArrayList<Chara>();
+        character_list  = new ArrayList<>();
     }
 
     @Before
@@ -120,7 +120,6 @@ public class TestCharacter {
     {
         for(Chara currentCharacter : character_list)
         {
-            int health = currentCharacter.getHealth();
             int maxHealth = currentCharacter.getMaxHealth();
             String msg = "Testing " + currentCharacter.getName();
             currentCharacter.setHealth(maxHealth + 10);

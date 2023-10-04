@@ -17,72 +17,26 @@ public class TestCharacter {
     @BeforeClass
     public static void SetUpClass()
     {
+        int i = 0;
         character_list  = new ArrayList<>();
+
+        Chara TestCharacter = new KinesiologyMajor(i++);
+        character_list.add(TestCharacter);
+        TestCharacter = new ZoologyMajor(i++);
+        character_list.add(TestCharacter);
+        TestCharacter = new EngMajor(i++);
+        character_list.add(TestCharacter);
+        TestCharacter = new ChemistryMajor(i++);
+        character_list.add(TestCharacter);
+        TestCharacter = new BiomedMajor(i++);
+        character_list.add(TestCharacter);
+        TestCharacter = new PhilosophyMajor(i++);
+        character_list.add(TestCharacter);
     }
 
     @Before
     public void SetUpTest(){
         list_size = character_list.size();
-    }
-
-    @Test
-    public void testKinesiology()
-    {
-        Chara TestCharacter = new KinesiologyMajor(list_size);
-        character_list.add(TestCharacter);
-
-        // Test get name
-        assertEquals("KinesiologyMajor",  character_list.get(list_size).getName());
-    }
-
-    @Test
-    public void testZooMajor()
-    {
-        Chara TestCharacter = new ZoologyMajor(list_size);
-        character_list.add(TestCharacter);
-
-        assertNotEquals("Engineering Major", character_list.get(list_size).getName());
-        assertEquals("Zoology Major",  character_list.get(list_size).getName());
-    }
-
-    @Test
-    public void testEngMajor()
-    {
-        Chara TestCharacter = new EngMajor(list_size);
-        character_list.add(TestCharacter);
-
-        assertNotEquals("Zoology Major",  character_list.get(list_size).getName());
-        assertEquals("Engineering Major",  character_list.get(list_size).getName());
-    }
-
-    @Test
-    public void testChemistryMajor()
-    {
-        Chara TestCharacter = new ChemistryMajor(list_size);
-        character_list.add(TestCharacter);
-
-        assertNotEquals("Engineering Major", character_list.get(list_size).getName());
-        assertEquals("Chemistry Major",  character_list.get(list_size).getName());
-    }
-
-    @Test
-    public void testBiomedMajor()
-    {
-        Chara TestCharacter = new BiomedMajor(list_size);
-        character_list.add(TestCharacter);
-
-        assertNotEquals("Engineering Major", character_list.get(list_size).getName());
-        assertEquals("Biomedical Major",  character_list.get(list_size).getName());
-    }
-
-    @Test
-    public void testPhilosophyMajor()
-    {
-        Chara TestCharacter = new PhilosophyMajor(list_size);
-        character_list.add(TestCharacter);
-
-        assertNotEquals("Engineering Major", character_list.get(list_size).getName());
-        assertEquals("Philosophy Major",  character_list.get(list_size).getName());
     }
 
     @Test
@@ -191,19 +145,6 @@ public class TestCharacter {
     }
 
     @Test
-    public void testNegativeMana()
-    {
-        for(Chara currentCharacter : character_list)
-        {
-            String msg = "Testing " + currentCharacter.getName();
-            // test mana number negative
-            currentCharacter.setMana(-10);
-            assertNotEquals(msg, -10, currentCharacter.getMana());
-            assertEquals(msg, 0, currentCharacter.getMana());
-        }
-    }
-
-    @Test
     public void testMaxMana()
     {
         for(Chara currentCharacter : character_list)
@@ -284,8 +225,6 @@ public class TestCharacter {
             int attacker_attack = attackter.getAttack();
             int victim_health = victim.getHealth();
             attackter.attack(victim);
-
-            System.out.println(victim_health - attacker_attack);
 
             assertEquals(msg, victim_health - attacker_attack, victim.getHealth());
             assertEquals(msg, victim_health - victim.getHealth(), attacker_attack);

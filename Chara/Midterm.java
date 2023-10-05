@@ -24,8 +24,12 @@ public class Midterm extends Character {
 	// permanent-debuff on all players
 	@Override
 	protected boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos, GameStatus gameStatus) {
+		theMap = null;
+		players = null;
+		enemies = null;
+
 		//reduce all player characters attack value by one
-		for(Character member : players) {
+		for(Character member : gameStatus.players) {
 			member.setAttack(member.getAttack() - 1);
 			//lower mana value by ten
 			setMana(getMana() - 10);

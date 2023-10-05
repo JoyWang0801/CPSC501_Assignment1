@@ -28,9 +28,13 @@ public class ChemistryMajor extends Character {
 	//this special boosts the attack of your allies
 	@Override
 	protected boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos, GameStatus gameStatus) {
+		theMap = null;
+		players = null;
+		enemies = null;
+
 		boolean didSomething = false;
-		int choice = theMap.getID(xPos, yPos);
-		for(Character teammate: players) {
+		int choice = gameStatus.theMap.getID(xPos, yPos);
+		for(Character teammate: gameStatus.players) {
 			if (choice == teammate.getID()) {
 				teammate.setAttack(teammate.getAttack() + 5);
 				setMana(getMana() - 3);

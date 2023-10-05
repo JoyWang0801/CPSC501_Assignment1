@@ -30,26 +30,30 @@ super("Biomedical Major", id, 10, 250, 3, 10, 250, 7, 4, 1, "This special boosts
 	//this special boosts the health of a near-by ally
 	@Override
 	protected boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos, GameStatus gameStatus) {
+		theMap = null;
+		players = null;
+		enemies = null;
+
 		boolean didSomething = false;
 
-		Integer choice = theMap.getID(xPos, yPos);
+		Integer choice = gameStatus.theMap.getID(xPos, yPos);
 		boolean isPlayer = false;
 		int playerID = 0;
 		int playerIndex = 0;
-		for(int i = 0; i < players.size(); i++) {
+		for(int i = 0; i < gameStatus.players.size(); i++) {
 			if(!isPlayer) {
-				playerID = players.get(i).getID();
+				playerID = gameStatus.players.get(i).getID();
 				isPlayer = playerID == choice;
 				playerIndex = i;
 			}
 		}
 
 		if(isPlayer) {
-			int[] playerPos = theMap.getPos(playerID);
-			int[] healerPos = theMap.getPos(getID());
+			int[] playerPos = gameStatus.theMap.getPos(playerID);
+			int[] healerPos = gameStatus.theMap.getPos(getID());
 			int range = Math.abs(healerPos[0] - playerPos[0]) + Math.abs(healerPos[1] - playerPos[1]);
 			if(range <= 3) {
-				Character healed = players.get(playerIndex);
+				Character healed = gameStatus.players.get(playerIndex);
 				healed.setHealth(healed.getHealth() + 40);
 				setMana(getMana() - 3);
 				didSomething = true;

@@ -26,9 +26,13 @@ public class ZoologyMajor extends Character {
 	//Special allows the ZoologyMajor Character to take a second movement action
 	@Override
 	protected boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos, GameStatus gameStatus) {
+		theMap = null;
+		players = null;
+		enemies = null;
+
 		boolean didSomething = false;
 
-		didSomething = theMap.move(this.getID(), xPos, yPos, this.getRange());
+		didSomething = gameStatus.theMap.move(this.getID(), xPos, yPos, this.getRange());
 		if (didSomething == true) {
 			setMana(getMana() - 2);
 		}

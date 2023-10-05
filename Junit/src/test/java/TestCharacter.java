@@ -269,19 +269,28 @@ public class TestCharacter {
 
 
     @Test
-    public void testBiomedicalSpecial()
+    public void testKinesiologySpecial()
     {
         Character current_character = character_list.get(0);
-        Character vitim = enemy_list.get(0);
+        Character victim = enemy_list.get(0);
+
         int character_id = current_character.getID();
         int victim_xpos = m.getPos(character_id)[0];
         int victim_ypos = m.getPos(character_id)[1] + 1;
-        m.setPos(vitim.getID(), victim_xpos, victim_ypos);
-        int new_health = vitim.getHealth() - current_character.getAttack() * 2;
+        m.setPos(victim.getID(), victim_xpos, victim_ypos);
+        int new_health = victim.getHealth() - current_character.getAttack() * 2;
 
         boolean success = current_character.Special(m, character_list, enemy_list, victim_xpos, victim_ypos);
 
-        assertEquals(new_health, vitim.getHealth());
+        if(success)
+        {
+            assertEquals(new_health, victim.getHealth());
+        }
+        else
+        {
+            assertFalse(current_character.getName() + " failed to perform special attack", true);
+        }
+
     }
 
     @Test
@@ -294,9 +303,124 @@ public class TestCharacter {
         int new_x = m.getPos(character_id)[0];
         int new_y = m.getPos(character_id)[1] + 1;
 
+        System.out.println(m.PrintMap());
+
+
         boolean success = current_character.Special(m, character_list, enemy_list, new_y, new_x);
 
-        assertEquals(new_x, m.getPos(character_id)[0]);
-        assertEquals(new_y, m.getPos(character_id)[1]);
+        if(success)
+        {
+            assertEquals(new_x, m.getPos(character_id)[0]);
+            assertEquals(new_y, m.getPos(character_id)[1]);
+        }
+        else
+        {
+            assertFalse(current_character.getName() + " failed to perform special attack", true);
+        }
+    }
+
+    @Test
+    public void testEngineerSpecial()
+    {
+        Character current_character = character_list.get(2);
+        Character victim = enemy_list.get(0);
+        Character victim2 = enemy_list.get(0);
+
+        int character_id = current_character.getID();
+        m.setPos(character_id, 6, 6);
+
+        int victim_xpos = m.getPos(character_id)[0] + 2;
+        int victim_ypos = m.getPos(character_id)[1];
+        int new_health = victim.getHealth() - current_character.getAttack();
+        m.setPos(victim.getID(), victim_xpos, victim_ypos);
+        m.setPos(victim2.getID(), victim_xpos, victim_ypos + 2);
+
+        boolean success = current_character.Special(m, character_list, enemy_list, victim_xpos, victim_ypos);
+
+        if(success)
+        {
+            assertEquals(new_health, victim.getHealth());
+            assertEquals(new_health, victim2.getHealth());
+        }
+        else
+        {
+            assertFalse(current_character.getName() + " failed to perform special attack", true);
+        }
+    }
+
+    @Test
+    public void testChemistrySpecial()
+    {
+        Character current_character = character_list.get(3);
+        Character alias = character_list.get(2);
+        Character victim = enemy_list.get(0);
+
+        current_character.setMana(current_character.getMaxMana());
+        m.setPos(current_character.getID(), 6, 6);
+        m.setPos(alias.getID(), 6, 7);
+
+        int xpos = m.getPos(alias.getID())[0] + 1;
+        int ypos = m.getPos(alias.getID())[1];
+        int new_health = victim.getHealth() - victim.getAttack() - 5;
+        m.setPos(victim.getID(), xpos, ypos);
+
+        boolean success = current_character.Special(m, character_list, enemy_list, 7, 6);
+        boolean s = alias.Special(m, character_list, enemy_list, ypos, xpos);
+
+        if(success && s)
+        {
+            assertEquals(new_health, victim.getHealth());
+        }
+        else
+        {
+            assertFalse(current_character.getName() + " failed to perform special attack", true);
+        }
+    }
+
+    @Test
+    public void testBiomedicalSpecial()
+    {
+        Character current_character = character_list.get(4);
+        Character alias = character_list.get(2);
+
+        m.setPos(current_character.getID(), 6, 6);
+        m.setPos(alias.getID(), 6, 7);
+        alias.setHealth(1);
+        int new_health = alias.getHealth() + 40;
+
+        boolean success = current_character.Special(m, character_list, enemy_list, 6, 7);
+
+        if(success)
+        {
+            assertEquals(new_health, alias.getHealth());
+        }
+        else
+        {
+            assertFalse(current_character.getName() + " failed to perform special attack", true);
+        }
+    }
+
+    @Test
+    public void testPhilosophyMajorSpecial()
+    {
+        Character current_character = character_list.get(5);
+        Character enemy = enemy_list.get(0);
+
+        enemy.setID(0);
+        m.setPos(current_character.getID(), 6, 6);
+        m.setPos(enemy.getID(), 7, 6);
+        int new_health = current_character.getHealth() + 5 - enemy.getAttack();
+
+        boolean success = current_character.Special(m, character_list, enemy_list, 7, 6);
+        enemy.attack(current_character);
+
+        if(success)
+        {
+            assertEquals(new_health, current_character.getHealth());
+        }
+        else
+        {
+            assertFalse(current_character.getName() + " failed to perform special attack", true);
+        }
     }
 }

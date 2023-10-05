@@ -81,6 +81,10 @@ public class TestCharacterSpecial {
             assertFalse(current_character.getName() + " failed to perform special attack", true);
         }
 
+        current_character.setMana(0);
+        success = current_character.Special(victim_xpos, victim_ypos, game_status);
+
+        assertFalse("Mana is not enough to use special", success);
     }
 
     @Test
@@ -93,7 +97,7 @@ public class TestCharacterSpecial {
         int new_x = m.getPos(character_id)[0];
         int new_y = m.getPos(character_id)[1] + 1;
 
-        boolean success = current_character.Special( new_y, new_x, game_status);
+        boolean success = current_character.Special(new_y, new_x, game_status);
 
         if(success)
         {
@@ -104,6 +108,10 @@ public class TestCharacterSpecial {
         {
             assertFalse(current_character.getName() + " failed to perform special attack", true);
         }
+
+        current_character.setMana(0);
+        success = current_character.Special(new_y, new_x, game_status);
+        assertFalse("Mana is not enough to use special", success);
     }
 
     @Test
@@ -133,6 +141,10 @@ public class TestCharacterSpecial {
         {
             assertFalse(current_character.getName() + " failed to perform special attack", true);
         }
+
+        current_character.setMana(0);
+        success = current_character.Special(victim_xpos, victim_ypos, game_status);
+        assertFalse("Mana is not enough to use special", success);
     }
 
     @Test
@@ -163,6 +175,10 @@ public class TestCharacterSpecial {
         {
             assertFalse(current_character.getName() + " failed to perform special attack", true);
         }
+
+        current_character.setMana(0);
+        success = current_character.Special(7, 6, game_status);
+        assertFalse("Mana is not enough to use special", success);
     }
 
     @Test
@@ -186,6 +202,10 @@ public class TestCharacterSpecial {
         {
             assertFalse(current_character.getName() + " failed to perform special attack", true);
         }
+
+        current_character.setMana(0);
+        success = current_character.Special(6, 7, game_status);
+        assertFalse("Mana is not enough to use special", success);
     }
 
     @Test
@@ -210,6 +230,10 @@ public class TestCharacterSpecial {
         {
             assertFalse(current_character.getName() + " failed to perform special attack", true);
         }
+
+        current_character.setMana(0);
+        success = current_character.Special(7, 6, game_status);
+        assertFalse("Mana is not enough to use special", success);
     }
 
     @Test
@@ -235,6 +259,10 @@ public class TestCharacterSpecial {
         {
             assertFalse(current_character.getName() + " failed to perform special attack", true);
         }
+
+        current_character.setMana(0);
+        success = current_character.Special(0, 0, game_status);
+        assertFalse("Mana is not enough to use special", success);
     }
 
     @Test
@@ -256,5 +284,9 @@ public class TestCharacterSpecial {
         {
             assertFalse(current_character.getName() + " failed to perform special attack", true);
         }
+
+        current_character.setMana(0);
+        success = current_character.Special(6, 6, game_status);
+        assertFalse("Mana is not enough to use special", success);
     }
 }

@@ -46,7 +46,21 @@ public abstract class Character {
 	
 	public int getMaxMana() {return maxMana;}
 	
-	public void setMaxMana(int newMax) {maxMana = newMax;}
+	public void setMaxMana(int newMax)
+	{
+		if(newMax < 0)
+		{
+			maxMana = 0;
+		}
+		else
+		{
+			if(getMana() > newMax)
+			{
+				setMana(newMax);
+			}
+			maxMana = newMax;
+		}
+	}
 	
 	public int getMove() {return move;}
 	
@@ -60,6 +74,10 @@ public abstract class Character {
 	}
 	public void setMaxAttack(int i) {
 		maxAttack = i;
+		if(getAttack() > i)
+		{
+			setAttack(i);
+		}
 	}
 	public int getMaxAttack() {
 		int toReturn = maxAttack;
@@ -71,6 +89,10 @@ public abstract class Character {
 	}
 	public void setMaxHealth(int i) {
 		maxHealth = i;
+		if(getHealth() > i)
+		{
+			setHealth(i);
+		}
 	}
 	public int getRange() {  
 	      return range;

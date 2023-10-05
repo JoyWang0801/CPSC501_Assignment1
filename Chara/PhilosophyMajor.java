@@ -14,21 +14,27 @@ public class PhilosophyMajor extends Character {
 	}
 	
 	//methods
-	
-	//this special lowers the attack of an enemy
-	public boolean Special(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos) {
-		boolean didSomething = false;
+	@Override
+	protected boolean CheckManaEnoughForSpecial() {
 		if(getMana() < 2)
-			{System.out.println("This special requires 2 mana");}
-		else {
-			int choice = theMap.getID(xPos, yPos);
-			for(Character foe: enemies) {
-				if (choice == foe.getID()) {
-					enemies.get(choice).setAttack(enemies.get(choice).getAttack() - 5);
-					setMana(getMana() - 2);
-					didSomething = true;
-				}
-			}	
+		{
+			System.out.println("This special requires 2 mana");
+			return false;
+		}
+		return true;
+	}
+
+	//this special lowers the attack of an enemy
+	@Override
+	protected boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos) {
+		boolean didSomething = false;
+		int choice = theMap.getID(xPos, yPos);
+		for(Character foe: enemies) {
+			if (choice == foe.getID()) {
+				enemies.get(choice).setAttack(enemies.get(choice).getAttack() - 5);
+				setMana(getMana() - 2);
+				didSomething = true;
+			}
 		}
 		return didSomething;
 	}

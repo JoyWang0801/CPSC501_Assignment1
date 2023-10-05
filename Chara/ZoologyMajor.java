@@ -13,15 +13,21 @@ public class ZoologyMajor extends Character {
 		}
 		
 	//methods
-	
-	//Special allows the ZoologyMajor Character to take a second movement action
-	public boolean Special(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos) {
-		boolean didSomething = false;
+	@Override
+	protected boolean CheckManaEnoughForSpecial() {
 		if (getMana() < 2) {
 			System.out.println("This special requires 2 mana");
-		} else {
-			didSomething = theMap.move(this.getID(), xPos, yPos, this.getRange());
+			return false;
 		}
+		return true;
+	}
+
+	//Special allows the ZoologyMajor Character to take a second movement action
+	@Override
+	protected boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos) {
+		boolean didSomething = false;
+
+		didSomething = theMap.move(this.getID(), xPos, yPos, this.getRange());
 		if (didSomething == true) {
 			setMana(getMana() - 2);
 		}

@@ -12,57 +12,64 @@ public class EngineeringMajor extends Character {
 		public EngineeringMajor(int id) {
 			super("Engineering Major", id, 20, 200, 3, 20, 200, 5, 4, 4, "This special move attacks any enemies in the same chosen column or row as the Engineering Major (costs 3 mana). Select a tile in the same row or column as the engineering major to decide the direction to attack");
 		}
-	
+
+	@Override
+	protected boolean CheckManaEnoughForSpecial() {
+		if (getMana() < 2) {
+			System.out.println("This special requires 2 mana");
+			return false;
+		}
+		return true;
+	}
+
 	//this special attacks any enemies in the same row as the engineer
-	public boolean Special(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos) {
+	@Override
+	protected boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos) {
 		boolean didSomething = false;
 		int row = theMap.getPos(getID())[1];
 		int col = theMap.getPos(getID())[0];
-		
-		if (getMana() < 2) {
-			System.out.println("This special requires 2 mana");
-		
+
 		//if same position as engineer return false
-		} else if (this.getID() == theMap.getID(xPos, yPos)) {
+		if (this.getID() == theMap.getID(xPos, yPos)) {
 			didSomething = false;
-	
-		//if column	
+
+			//if column
 		} else if (theMap.getPos(this.getID())[0] == xPos) {
-			
+
 			//if above
 			for(int each = 0; each < enemies.size(); each++) {
 				if(theMap.getPos(enemies.get(each).getID())[0] == col && theMap.getPos(enemies.get(each).getID())[1] < theMap.getPos(this.getID())[1]) {
-				attack(enemies.get(each));
-				System.out.println("I attacked");
+					attack(enemies.get(each));
+					System.out.println("I attacked");
 				}
 			}
-			
+
 			//if below
 			for(int each = 0; each < enemies.size(); each++) {
 				if(theMap.getPos(enemies.get(each).getID())[0] == col && theMap.getPos(enemies.get(each).getID())[1] > theMap.getPos(this.getID())[1]) {
-				attack(enemies.get(each));
+					attack(enemies.get(each));
 				}
 			}
 			didSomething = true;
-		//if row
+			//if row
 		} else if (theMap.getPos(this.getID())[1] == yPos) {
-			
+
 			//if left
 			for(int each = 0; each < enemies.size(); each++) {
 				if(theMap.getPos(enemies.get(each).getID())[1] == row && theMap.getPos(enemies.get(each).getID())[0] < theMap.getPos(this.getID())[0]) {
-				attack(enemies.get(each));
+					attack(enemies.get(each));
 				}
 			}
-			
+
 			//if right
 			for(int each = 0; each < enemies.size(); each++) {
 				if(theMap.getPos(enemies.get(each).getID())[1] == row && theMap.getPos(enemies.get(each).getID())[0] > theMap.getPos(this.getID())[0]) {
-				attack(enemies.get(each));
+					attack(enemies.get(each));
 				}
-			}	
+			}
 			didSomething = true;
 		}
-		
+
 		if (didSomething == true) {
 			setMana(getMana() - 2);
 		}

@@ -14,22 +14,29 @@ public class ChemistryMajor extends Character {
 	}
 
 	//methods
-	
-	//this special boosts the attack of your allies
-	public boolean Special(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos) {
-		boolean didSomething = false;
+	@Override
+	protected boolean CheckManaEnoughForSpecial() {
 		if(getMana() < 3)
-			{System.out.println("This special requires 3 mana");}
-		else {
-			int choice = theMap.getID(xPos, yPos);
-			for(Character teammate: players) {
-				if (choice == teammate.getID()) {
-					teammate.setAttack(teammate.getAttack() + 5);
-					setMana(getMana() - 3);
-					didSomething = true;
-				}		
+		{
+			System.out.println("This special requires 3 mana");
+			return false;
+		}
+		return true;
+	}
+
+	//this special boosts the attack of your allies
+	@Override
+	protected boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos) {
+		boolean didSomething = false;
+		int choice = theMap.getID(xPos, yPos);
+		for(Character teammate: players) {
+			if (choice == teammate.getID()) {
+				teammate.setAttack(teammate.getAttack() + 5);
+				setMana(getMana() - 3);
+				didSomething = true;
 			}
 		}
+
 		return didSomething;
 	}
 }

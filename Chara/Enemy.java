@@ -17,4 +17,14 @@ public class Enemy extends Character {
 	public boolean Special(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos) {
 		return false;
 	}
+
+	@Override
+	protected boolean CheckManaEnoughForSpecial() {
+		return false;
+	}
+
+	@Override
+	protected boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos) {
+		return false;
+	}
 }

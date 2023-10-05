@@ -124,8 +124,19 @@ public abstract class Character {
 		return specDesc;
 	}
 	
-	public abstract boolean Special(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos);
-	
+	public boolean Special(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos)
+	{
+		if(CheckManaEnoughForSpecial())
+		{
+			return DoSpecialAttack(theMap, players, enemies, xPos, yPos);
+		}
+		return false;
+	}
+
+	protected abstract boolean CheckManaEnoughForSpecial();
+
+	protected abstract boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos);
+
 	public void attack(Character receiver) {
 		receiver.setHealth(receiver.getHealth() - getAttack());
 	}

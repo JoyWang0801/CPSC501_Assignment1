@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import item.*;
 public class Game {
 
-	private static Scanner userIn = new Scanner(System.in);
+	private static Scanner userInput = new Scanner(System.in);
 	private static mapGenerator genMap = new mapGenerator();
 	
 	public static void main(String[] args) {
@@ -134,7 +134,7 @@ public class Game {
 				if(notAllMoved) System.out.println("Enter 1 to move a character");
 				if(notAllActed) System.out.println("Enter 2 to have a character do something");
 				System.out.println("Enter 3 to end your turn now");
-				int choice = userIn.nextInt();
+				int choice = userInput.nextInt();
 				if(notAllMoved && choice == 1) {
 					playerMove(players, playersDidntMove, currentMap);
 				}
@@ -158,7 +158,7 @@ public class Game {
 			System.out.print("ID: " + didntMove.get(i).getID() + " ");
 		} System.out.println();
 		System.out.println("Enter the ID of a character to move");
-		int moveChoice = userIn.nextInt();
+		int moveChoice = userInput.nextInt();
 		boolean moved = false;
 		if(checkIfIDInList(moveChoice, didntMove)) {
 			moved = doMove(getCharaFromID(moveChoice, players), currentMap);
@@ -172,14 +172,14 @@ public class Game {
 			System.out.print("ID: " + didntAct.get(i).getID() + " ");
 		} System.out.println();
 		System.out.println("Enter the ID of a character to act");
-		int actCharChoice = userIn.nextInt();
+		int actCharChoice = userInput.nextInt();
 		if(checkIfIDInList(actCharChoice, didntAct)) {
 			boolean acted = false;
 			System.out.println("Enter 1 to attack an enemy");
 			System.out.println("Enter 2 to use an item");
 			System.out.println("Enter 3 to use a character's special ability");
 			System.out.println("Enter 4 to interact with an object");
-			int actChoice = userIn.nextInt();
+			int actChoice = userInput.nextInt();
 			//if(actChoice == 1) {
 			switch(actChoice) {
 			case 1:
@@ -198,9 +198,9 @@ public class Game {
 	private static boolean doMove(Character charToMove, map currentMap) {
 		boolean didMove = false;
 		System.out.println("Enter the x coordinate you want to move to");
-		int newX = userIn.nextInt();
+		int newX = userInput.nextInt();
 		System.out.println("enter the y coordinate you want to move to");
-		int newY = userIn.nextInt();
+		int newY = userInput.nextInt();
 		didMove = currentMap.move(charToMove.getID(), newY, newX, charToMove.getMove());
 		return didMove;
 	}
@@ -215,7 +215,7 @@ public class Game {
 	private static boolean doAttack(Character attacker, ArrayList<Character> enemiesList, map currentMap) {
 		System.out.println("You can attack in a range of " + attacker.getRange());
 		System.out.println("Enter the ID of an enemy to attack");
-		int choice = userIn.nextInt();
+		int choice = userInput.nextInt();
 		Character receiver = getCharaFromID(choice, enemiesList);
 		boolean didAttack = false;
 		if (checkIfIDInList(choice, enemiesList)) {
@@ -279,9 +279,9 @@ public class Game {
 		
 		//then make a scanner for x and y and use that in special
 		System.out.println("Enter the x coordinate of the tile");
-		int xPos = userIn.nextInt();
+		int xPos = userInput.nextInt();
 		System.out.println("Enter the y coordinate of the tile");
-		int yPos = userIn.nextInt();
+		int yPos = userInput.nextInt();
 		
 		//use the characters special given the chosen tile
 		used = player.Special(currentMap, players, enemies, xPos, yPos);
@@ -294,7 +294,7 @@ public class Game {
 			System.out.println("" + (i + 1) + ". " + user.getItem(i).getName());
 		}
 		System.out.println("4. Do not use an item");
-		int choice = userIn.nextInt();
+		int choice = userInput.nextInt();
 		boolean itemWasUsed = false;
 		switch(choice) {
 		case 1:
@@ -330,7 +330,7 @@ public class Game {
 	private static boolean interact(Character user, map currentMap) {
 		boolean didSomething = false;
 		System.out.println("Enter the ID of an item on the map you would like to pick up");
-		int choice = userIn.nextInt();
+		int choice = userInput.nextInt();
 		int[] itemCoords = currentMap.getPos(choice);
 		int[] userCoords = currentMap.getPos(user.getID());
 		int range = (Math.abs(userCoords[0] - itemCoords[0]) + Math.abs(userCoords[1] - itemCoords[1]));

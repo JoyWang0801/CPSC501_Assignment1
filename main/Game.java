@@ -1,7 +1,7 @@
 package main;
 import java.util.Scanner;
 
-import Chara.BiomedMajor;
+import Chara.BiomedicalMajor;
 import Chara.Character;
 import Chara.Enemy;
 import Chara.EngMajor;
@@ -33,7 +33,7 @@ public class Game {
 		players.add(toAdd);//put them into the player character list
 		toAdd = new EngMajor(2);//new ranged eng character
 		players.add(toAdd);
-		toAdd = new BiomedMajor(3);//new healer biomed character
+		toAdd = new BiomedicalMajor(3);//new healer biomed character
 		players.add(toAdd);
 		boolean stillAlive = true; //boolean to keep track of the player list - if its empty the boolean is false
 		for(map Map: worldMap) {// going through all maps in the world

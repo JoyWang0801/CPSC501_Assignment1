@@ -3,14 +3,14 @@ import java.util.ArrayList;
 
 import main.map;
 
-public class BiomedMajor extends Character {
+public class BiomedicalMajor extends Character {
 	
 	//instance variables
 	
 	
 	
 	//constructor
-	public BiomedMajor(int id) {
+	public BiomedicalMajor(int id) {
 super("Biomedical Major", id, 10, 250, 3, 10, 250, 7, 4, 1, "This special boosts the health of a chosen nearby ally (costs 3 mana). Select the tile of the teammate you would like to heal that is within three tiles");
 	}
 	

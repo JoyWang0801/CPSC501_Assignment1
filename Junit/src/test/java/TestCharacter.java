@@ -29,15 +29,18 @@ public class TestCharacter {
         character_list.add(testCharacter);
         testCharacter = new ChemistryMajor(i++);
         character_list.add(testCharacter);
-        testCharacter = new BiomedMajor(i++);
+        testCharacter = new BiomedicalMajor(i++);
         character_list.add(testCharacter);
-        testCharacter = new PhilosophyMajor(i++);
+        testCharacter = new PhilosophyMajor(i);
         character_list.add(testCharacter);
     }
 
     @Before
-    public void SetUpTest(){
+    public void SetUpTest()
+    {
+        // making sure all characters are initiated
         list_size = character_list.size();
+        assertEquals(6, list_size);
     }
 
     @Test

@@ -27,26 +27,32 @@ super("Biomedical Major", id, 10, 250, 3, 10, 250, 7, 4, 1, "This special boosts
 		return true;
 	}
 
+	private int VerifyIdentityAndGetID(int xPos, int yPos, GameStatus gameStatus)
+	{
+		int choice = gameStatus.getCurrentMap().getID(xPos, yPos);
+		boolean isPlayer = false;
+		int playerID = 0;
+		int playerIndex = -1;
+		for(int i = 0; i < gameStatus.getPlayers().size(); i++) {
+			if(!isPlayer) {
+				playerID = gameStatus.getPlayers().get(i).getID();
+				isPlayer = playerID == choice;
+				playerIndex = i;
+			}
+		}
+		return playerIndex;
+	}
+
 	//this special boosts the health of a near-by ally
 	@Override
 	protected boolean DoSpecialAttack(int xPos, int yPos, GameStatus gameStatus) {
 		boolean didSomething = false;
 		ArrayList<Character> players = gameStatus.getPlayers();
 		map theMap = gameStatus.getCurrentMap();
+		int playerIndex = VerifyIdentityAndGetID(xPos, yPos, gameStatus);
+		int playerID = players.get(playerIndex).getID();
 
-		Integer choice = theMap.getID(xPos, yPos);
-		boolean isPlayer = false;
-		int playerID = 0;
-		int playerIndex = 0;
-		for(int i = 0; i < players.size(); i++) {
-			if(!isPlayer) {
-				playerID = players.get(i).getID();
-				isPlayer = playerID == choice;
-				playerIndex = i;
-			}
-		}
-
-		if(isPlayer) {
+		if(playerIndex >= 0) {
 			int[] playerPos =  theMap.getPos(playerID);
 			int[] healerPos =  theMap.getPos(getID());
 			int range = Math.abs(healerPos[0] - playerPos[0]) + Math.abs(healerPos[1] - playerPos[1]);

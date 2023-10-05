@@ -70,7 +70,7 @@ public class TestCharacterSpecial {
         m.setPos(victim.getID(), victim_xpos, victim_ypos);
         int new_health = victim.getHealth() - current_character.getAttack() * 2;
 
-        boolean success = current_character.Special(m, character_list, enemy_list, victim_xpos, victim_ypos, game_status);
+        boolean success = current_character.Special(victim_xpos, victim_ypos, game_status);
 
         if(success)
         {
@@ -93,7 +93,7 @@ public class TestCharacterSpecial {
         int new_x = m.getPos(character_id)[0];
         int new_y = m.getPos(character_id)[1] + 1;
 
-        boolean success = current_character.Special(m, character_list, enemy_list, new_y, new_x, game_status);
+        boolean success = current_character.Special( new_y, new_x, game_status);
 
         if(success)
         {
@@ -122,7 +122,7 @@ public class TestCharacterSpecial {
         m.setPos(victim.getID(), victim_xpos, victim_ypos);
         m.setPos(victim2.getID(), victim_xpos, victim_ypos + 2);
 
-        boolean success = current_character.Special(m, character_list, enemy_list, victim_xpos, victim_ypos, game_status);
+        boolean success = current_character.Special( victim_xpos, victim_ypos, game_status);
 
         if(success)
         {
@@ -152,8 +152,8 @@ public class TestCharacterSpecial {
         int new_health = victim.getHealth() - victim.getAttack() - 5;
         m.setPos(victim.getID(), xpos, ypos);
 
-        boolean success = current_character.Special(m, character_list, enemy_list, 7, 6, game_status);
-        boolean s = alias.Special(m, character_list, enemy_list, ypos, xpos, game_status);
+        boolean success = current_character.Special( 7, 6, game_status);
+        boolean s = alias.Special( ypos, xpos, game_status);
 
         if(success && s)
         {
@@ -168,15 +168,15 @@ public class TestCharacterSpecial {
     @Test
     public void testBiomedicalSpecial()
     {
-        Character current_character = character_list.get(4);
-        Character alias = character_list.get(2);
+        Character current_character = game_status.players.get(4);
+        Character alias = game_status.players.get(2);
 
         m.setPos(current_character.getID(), 6, 6);
         m.setPos(alias.getID(), 6, 7);
         alias.setHealth(1);
         int new_health = alias.getHealth() + 40;
 
-        boolean success = current_character.Special(m, character_list, enemy_list, 6, 7, game_status);
+        boolean success = current_character.Special( 6, 7, game_status);
 
         if(success)
         {
@@ -199,7 +199,7 @@ public class TestCharacterSpecial {
         m.setPos(enemy.getID(), 7, 6);
         int new_health = current_character.getHealth() + 5 - enemy.getAttack();
 
-        boolean success = current_character.Special(m, character_list, enemy_list, 7, 6, game_status);
+        boolean success = current_character.Special( 7, 6, game_status);
         enemy.attack(current_character);
 
         if(success)
@@ -222,13 +222,13 @@ public class TestCharacterSpecial {
         m.setPos(enemy.getID(), 7, 7);
         int new_attack = current_character.getAttack() - 1;
 
-        boolean success = enemy.Special(m, character_list, enemy_list, 0, 0, game_status);
+        boolean success = enemy.Special( 0, 0, game_status);
 
         if(success)
         {
             assertEquals(new_attack, current_character.getAttack());
             enemy.setMana(10);
-            enemy.Special(m, character_list, enemy_list, 0, 0, game_status);
+            enemy.Special( 0, 0, game_status);
             assertEquals(new_attack - 1, current_character.getAttack());
         }
         else
@@ -240,14 +240,14 @@ public class TestCharacterSpecial {
     @Test
     public void testEnemyFinalSpecial()
     {
-        Character current_character = character_list.get(5);
+        Character current_character = game_status.players.get(5);
         Character enemy = new Final("Final", 9, 15, 150, 0, 15, 150, 0, 3, 1);
 
         m.setPos(current_character.getID(), 6, 6);
         m.setPos(enemy.getID(), 7, 6);
         int new_health = current_character.getHealth() - 3 * enemy.getAttack();
 
-        boolean success = enemy.Special(m, character_list, enemy_list, 6, 6, game_status);
+        boolean success = enemy.Special( 6, 6, game_status);
         if(success)
         {
             assertEquals(new_health, current_character.getHealth());

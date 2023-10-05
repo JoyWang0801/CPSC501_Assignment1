@@ -91,4 +91,20 @@ public class TestGameStatus {
         assertNotEquals(attack_before, gameStatus.players.get(0).getAttack());
         assertEquals(attack_after, gameStatus.players.get(0).getAttack());
     }
+
+    @Test
+    public void testGameStatusMap()
+    {
+        gameStatus = new GameStatus();
+
+        mapGenerator mg = new mapGenerator();
+        map m1 = mg.generate();
+        map m2 = mg.generate();
+
+        gameStatus.theMap = m1;
+        assertNotSame(m2, gameStatus.theMap);
+        gameStatus.theMap = m2;
+        assertSame(m2, gameStatus.theMap);
+        assertNotSame(m1, gameStatus.theMap);
+    }
 }

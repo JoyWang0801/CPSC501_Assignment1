@@ -124,7 +124,7 @@ public abstract class Character {
 		return specDesc;
 	}
 	
-	public boolean Special(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos, GameStatus gameStatus)
+	public boolean Special(int xPos, int yPos, GameStatus gameStatus)
 	{
 		if(CheckManaEnoughForSpecial())
 		{

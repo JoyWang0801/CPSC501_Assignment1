@@ -113,7 +113,7 @@ public class Game {
 					Character currentEnemy = enemies.get(i);//get the current enemy in the list
 					ArrayList<Integer> playerIDs = new ArrayList<Integer>();//create a list to get the IDs of players to pass into AI
 					for(int j = 0; j < players.size(); j++) {//fill the player ID list
-						playerIDs.add(new Integer(players.get(j).getID())); 
+						playerIDs.add((Integer)(players.get(j).getID()));
 					}
 					enemyAI.moveAITowards(currentEnemy.getID(), currentEnemy.getMove(), playerIDs); //move all enemies toward the players (all enemies are aggressive for now)
 					Character closestPlayer = getCharaFromID(enemyAI.checkClosest(currentEnemy.getID(), playerIDs), players); //get the character closest to the enemy
@@ -285,7 +285,7 @@ public class Game {
 		int yPos = userInput.nextInt();
 		
 		//use the characters special given the chosen tile
-		used = player.Special(currentMap, players, enemies, xPos, yPos, gameStatus);
+		used = player.Special(xPos, yPos, gameStatus);
 		return used;
 	}
 	

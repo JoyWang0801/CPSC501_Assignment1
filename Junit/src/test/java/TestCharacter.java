@@ -21,24 +21,8 @@ public class TestCharacter {
 
     static map m;
 
-
-    /*
-    private static void putPawnsOnMap()
-    {
-        int[] test = m.getCharPos();// get default instatiated character position list
-        int[] test2 = m.getEnemyPos();// get default enemy posiyions
-        for(int i = 0; i < 3; i++) {//for all player characters
-            int index = i * 2;//get an index to use for the 1-D list of deafult positions (goes x then y)
-            m.setPos(players.get(i).getID(), m.getCharPos()[index], m.getCharPos()[index + 1]);//set the id of that character on the map
-        }
-
-        m.setPos(enemies.getID(), m.getEnemyPos()[0], m.getEnemyPos()[1]);
-
-        m.setPos(7, m.getItemPos()[0], m.getItemPos()[1]);//set the id of an item on the map (only one for now - will generate a random number when new items are eventually added
-    }
-*/
-    @BeforeClass
-    public static void SetUpClass()
+    @Before
+    public void SetUpTest()
     {
         mapGenerator mg = new mapGenerator();
         m = mg.generate();
@@ -65,11 +49,7 @@ public class TestCharacter {
         enemy_list.add(enemy);
         enemy = new Enemy("Enemy", i, 15, 150, 0, 15, 150, 0, 3, 1);
         enemy_list.add(enemy);
-    }
 
-    @Before
-    public void SetUpTest()
-    {
         // making sure all characters are initiated
         character_list_size = character_list.size();
         assertEquals(6, character_list_size);
@@ -356,6 +336,9 @@ public class TestCharacter {
         Character victim = enemy_list.get(0);
 
         current_character.setMana(current_character.getMaxMana());
+
+        System.out.println(current_character.getMana());
+
         m.setPos(current_character.getID(), 6, 6);
         m.setPos(alias.getID(), 6, 7);
 
@@ -414,6 +397,52 @@ public class TestCharacter {
         boolean success = current_character.Special(m, character_list, enemy_list, 7, 6);
         enemy.attack(current_character);
 
+        if(success)
+        {
+            assertEquals(new_health, current_character.getHealth());
+        }
+        else
+        {
+            assertFalse(current_character.getName() + " failed to perform special attack", true);
+        }
+    }
+
+    @Test
+    public void testEnemyMidtermSpecial()
+    {
+        Character current_character = character_list.get(5);
+        Character enemy = new Midterm("Final", 9, 15, 150, 0, 15, 150, 0, 3, 1);
+
+        m.setPos(current_character.getID(), 6, 6);
+        m.setPos(enemy.getID(), 7, 7);
+        int new_attack = current_character.getAttack() - 1;
+
+        boolean success = enemy.Special(m, character_list, enemy_list, 0, 0);
+
+        if(success)
+        {
+            assertEquals(new_attack, current_character.getAttack());
+            enemy.setMana(10);
+            enemy.Special(m, character_list, enemy_list, 0, 0);
+            assertEquals(new_attack - 1, current_character.getAttack());
+        }
+        else
+        {
+            assertFalse(current_character.getName() + " failed to perform special attack", true);
+        }
+    }
+
+    @Test
+    public void testEnemyFinalSpecial()
+    {
+        Character current_character = character_list.get(5);
+        Character enemy = new Final("Final", 9, 15, 150, 0, 15, 150, 0, 3, 1);
+
+        m.setPos(current_character.getID(), 6, 6);
+        m.setPos(enemy.getID(), 7, 6);
+        int new_health = current_character.getHealth() - 3 * enemy.getAttack();
+
+        boolean success = enemy.Special(m, character_list, enemy_list, 6, 6);
         if(success)
         {
             assertEquals(new_health, current_character.getHealth());

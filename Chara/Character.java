@@ -128,14 +128,14 @@ public abstract class Character {
 	{
 		if(CheckManaEnoughForSpecial())
 		{
-			return DoSpecialAttack(theMap, players, enemies, xPos, yPos, gameStatus);
+			return DoSpecialAttack(xPos, yPos, gameStatus);
 		}
 		return false;
 	}
 
 	protected abstract boolean CheckManaEnoughForSpecial();
 
-	protected abstract boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos, GameStatus gameStatus);
+	protected abstract boolean DoSpecialAttack(int xPos, int yPos, GameStatus gameStatus);
 
 	public void attack(Character receiver) {
 		receiver.setHealth(receiver.getHealth() - getAttack());

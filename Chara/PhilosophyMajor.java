@@ -27,11 +27,7 @@ public class PhilosophyMajor extends Character {
 
 	//this special lowers the attack of an enemy
 	@Override
-	protected boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos, GameStatus gameStatus) {
-		theMap = null;
-		players = null;
-		enemies = null;
-
+	protected boolean DoSpecialAttack(int xPos, int yPos, GameStatus gameStatus) {
 		boolean didSomething = false;
 		int choice = gameStatus.theMap.getID(xPos, yPos);
 		for(Character foe: gameStatus.enemies) {

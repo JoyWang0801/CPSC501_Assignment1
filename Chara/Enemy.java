@@ -25,7 +25,7 @@ public class Enemy extends Character {
 	}
 
 	@Override
-	protected boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos, GameStatus gameStatus) {
+	protected boolean DoSpecialAttack(int xPos, int yPos, GameStatus gameStatus) {
 		return false;
 	}
 }

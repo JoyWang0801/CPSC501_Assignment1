@@ -25,13 +25,7 @@ public class EngineeringMajor extends Character {
 
 	//this special attacks any enemies in the same row as the engineer
 	@Override
-	protected boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos, GameStatus gameStatus) {
-
-		theMap = null;
-		players = null;
-		enemies = null;
-
-
+	protected boolean DoSpecialAttack(int xPos, int yPos, GameStatus gameStatus) {
 		boolean didSomething = false;
 		int row = gameStatus.theMap.getPos(getID())[1];
 		int col = gameStatus.theMap.getPos(getID())[0];

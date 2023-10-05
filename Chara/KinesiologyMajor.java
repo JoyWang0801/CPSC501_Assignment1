@@ -25,11 +25,7 @@ public class KinesiologyMajor extends Character {
 
 	//this special deals a close-by enemy a large amount of damage
 	@Override
-	protected boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos, GameStatus gameStatus) {
-		theMap = null;
-		players = null;
-		enemies = null;
-
+	protected boolean DoSpecialAttack(int xPos, int yPos, GameStatus gameStatus) {
 		boolean success = false;
 		int choice = gameStatus.theMap.getID(xPos, yPos);
 		boolean isEnemy = false;

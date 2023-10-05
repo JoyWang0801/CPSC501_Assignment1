@@ -23,12 +23,8 @@ package Chara;
 
 		//this special move is a powerful AOE attack that hits all players within one space of the final three times
 		@Override
-		protected boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos, GameStatus gameStatus) {
+		protected boolean DoSpecialAttack(int xPos, int yPos, GameStatus gameStatus) {
 			//these two for loops check each spot around the final
-			theMap = null;
-			players = null;
-			enemies = null;
-
 			boolean didSomething = false;
 			for (int a = -1; a < 2; a++) {
 				for (int b = -1; b < 2; b++) {

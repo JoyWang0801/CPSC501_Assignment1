@@ -2,7 +2,8 @@ package Chara;
 
 	import java.util.ArrayList;
 
-import main.map;
+	import main.GameStatus;
+	import main.map;
 	public class Final extends Character {
 
 	public Final(String name, int id, int att, int health, int mana,
@@ -22,7 +23,7 @@ import main.map;
 
 		//this special move is a powerful AOE attack that hits all players within one space of the final three times
 		@Override
-		protected boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos) {
+		protected boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos, GameStatus gameStatus) {
 			//these two for loops check each spot around the final
 			boolean didSomething = false;
 			for (int a = -1; a < 2; a++) {

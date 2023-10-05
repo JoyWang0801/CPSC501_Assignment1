@@ -1,6 +1,7 @@
 package Chara;
 import java.util.ArrayList;
 
+import main.GameStatus;
 import main.map;
 
 public class Enemy extends Character {
@@ -24,7 +25,7 @@ public class Enemy extends Character {
 	}
 
 	@Override
-	protected boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos) {
+	protected boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos, GameStatus gameStatus) {
 		return false;
 	}
 }

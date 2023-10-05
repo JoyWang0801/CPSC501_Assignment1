@@ -1,6 +1,7 @@
 package Chara;
 import java.util.ArrayList;
 
+import main.GameStatus;
 import main.map;
 
 public class BiomedicalMajor extends Character {
@@ -28,7 +29,7 @@ super("Biomedical Major", id, 10, 250, 3, 10, 250, 7, 4, 1, "This special boosts
 
 	//this special boosts the health of a near-by ally
 	@Override
-	protected boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos) {
+	protected boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos, GameStatus gameStatus) {
 		boolean didSomething = false;
 
 		Integer choice = theMap.getID(xPos, yPos);

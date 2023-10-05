@@ -2,6 +2,7 @@ package Chara;
 		
 import java.util.ArrayList;
 
+import main.GameStatus;
 import main.map;
 public class Midterm extends Character {
 		
@@ -22,7 +23,7 @@ public class Midterm extends Character {
 
 	// permanent-debuff on all players
 	@Override
-	protected boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos) {
+	protected boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos, GameStatus gameStatus) {
 		//reduce all player characters attack value by one
 		for(Character member : players) {
 			member.setAttack(member.getAttack() - 1);

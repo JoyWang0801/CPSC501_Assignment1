@@ -2,6 +2,7 @@ package Chara;
 
 import java.util.ArrayList;
 
+import main.GameStatus;
 import main.map;
 
 
@@ -26,7 +27,7 @@ public class PhilosophyMajor extends Character {
 
 	//this special lowers the attack of an enemy
 	@Override
-	protected boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos) {
+	protected boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos, GameStatus gameStatus) {
 		boolean didSomething = false;
 		int choice = theMap.getID(xPos, yPos);
 		for(Character foe: enemies) {

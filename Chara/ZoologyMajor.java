@@ -1,6 +1,7 @@
 package Chara;
 import java.util.ArrayList;
 
+import main.GameStatus;
 import main.map;
 
 
@@ -24,7 +25,7 @@ public class ZoologyMajor extends Character {
 
 	//Special allows the ZoologyMajor Character to take a second movement action
 	@Override
-	protected boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos) {
+	protected boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos, GameStatus gameStatus) {
 		boolean didSomething = false;
 
 		didSomething = theMap.move(this.getID(), xPos, yPos, this.getRange());

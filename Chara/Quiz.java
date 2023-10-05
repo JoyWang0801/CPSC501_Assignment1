@@ -1,6 +1,7 @@
 package Chara;
 import java.util.ArrayList;
 
+import main.GameStatus;
 import main.map;
 
 public class Quiz extends Character {
@@ -10,7 +11,7 @@ public class Quiz extends Character {
 		super(name, id, att, health, mana, maxAtt, maxHealth, maxMana, move, range,"none");
 	}
 	@Override
-	public boolean Special(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos) {
+	public boolean Special(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos, GameStatus gameStatus) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -21,8 +22,7 @@ public class Quiz extends Character {
 	}
 
 	@Override
-	protected boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos) {
+	protected boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos, GameStatus gameStatus) {
 		return false;
 	}
-
 }

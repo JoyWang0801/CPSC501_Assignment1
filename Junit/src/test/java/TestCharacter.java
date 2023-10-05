@@ -29,7 +29,6 @@ public class TestCharacter {
         character_list.add(testCharacter);
         testCharacter = new EngineeringMajor(i++);
         character_list.add(testCharacter);
-
         testCharacter = new ChemistryMajor(i++);
         character_list.add(testCharacter);
         testCharacter = new BiomedicalMajor(i++);

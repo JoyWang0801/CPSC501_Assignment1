@@ -2,6 +2,7 @@ package Chara;
 
 import java.util.ArrayList;
 
+import main.GameStatus;
 import main.map;
 
 
@@ -24,7 +25,7 @@ public class EngineeringMajor extends Character {
 
 	//this special attacks any enemies in the same row as the engineer
 	@Override
-	protected boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos) {
+	protected boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos, GameStatus gameStatus) {
 		boolean didSomething = false;
 		int row = theMap.getPos(getID())[1];
 		int col = theMap.getPos(getID())[0];

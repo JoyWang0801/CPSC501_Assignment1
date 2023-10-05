@@ -13,7 +13,8 @@ public class Game {
 
 	private static Scanner userInput = new Scanner(System.in);
 	private static mapGenerator genMap = new mapGenerator();
-	
+
+	private static GameStatus gameStatus = new GameStatus();
 	public static void main(String[] args) {
 		playGame();
 	}
@@ -25,6 +26,8 @@ public class Game {
 		map[] worldMap = {genMap.generate(), genMap.generate(), genMap.generate()}; //create three random maps to act as the whole world
 		ArrayList<Character> players = new ArrayList<Character>(); //create a list to hold all player characters between iteration of map
 		ArrayList<Character> enemies = new ArrayList<Character>(); //create a list to hold all enemies between iterations
+		gameStatus.players = players;
+		gameStatus.enemies = enemies;
 		//make some default characters
 		Character toAdd = new KinesiologyMajor(1); //new close combat kines character (magic numbers are a bandaid right now)
 		players.add(toAdd);//put them into the player character list
@@ -34,6 +37,7 @@ public class Game {
 		players.add(toAdd);
 		boolean stillAlive = true; //boolean to keep track of the player list - if its empty the boolean is false
 		for(map Map: worldMap) {// going through all maps in the world
+			gameStatus.theMap = Map;
 			if(stillAlive) {// if the players havent died yet
 				System.out.println("Enter an integer to go to the next map");//a sort of between map pause screen, so it doesn't just pop into another map after one is beaten
 				enemies = new ArrayList<Character>(); //initialize a new enemy list for a new map
@@ -281,7 +285,7 @@ public class Game {
 		int yPos = userInput.nextInt();
 		
 		//use the characters special given the chosen tile
-		used = player.Special(currentMap, players, enemies, xPos, yPos);
+		used = player.Special(currentMap, players, enemies, xPos, yPos, gameStatus);
 		return used;
 	}
 	

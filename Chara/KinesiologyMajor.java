@@ -2,6 +2,7 @@ package Chara;
 
 import java.util.ArrayList;
 
+import main.GameStatus;
 import main.map;
 
 
@@ -24,7 +25,7 @@ public class KinesiologyMajor extends Character {
 
 	//this special deals a close-by enemy a large amount of damage
 	@Override
-	protected boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos) {
+	protected boolean DoSpecialAttack(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos, GameStatus gameStatus) {
 		boolean success = false;
 		int choice = theMap.getID(xPos, yPos);
 		boolean isEnemy = false;

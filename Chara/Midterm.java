@@ -3,7 +3,6 @@ package Chara;
 import java.util.ArrayList;
 
 import main.GameStatus;
-import main.map;
 public class Midterm extends Character {
 		
 	public Midterm(String name, int id, int att, int health, int mana, 
@@ -25,7 +24,8 @@ public class Midterm extends Character {
 	@Override
 	protected boolean DoSpecialAttack(int xPos, int yPos, GameStatus gameStatus) {
 		//reduce all player characters attack value by one
-		for(Character member : gameStatus.players) {
+		ArrayList<Character> players = gameStatus.getPlayers();
+		for(Character member : players) {
 			member.setAttack(member.getAttack() - 1);
 			//lower mana value by ten
 			setMana(getMana() - 10);

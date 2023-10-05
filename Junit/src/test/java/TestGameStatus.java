@@ -6,7 +6,6 @@ import Chara.Character;
 import main.GameStatus;
 import main.map;
 import main.mapGenerator;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -20,44 +19,16 @@ public class TestGameStatus {
 
     static GameStatus gameStatus;
 
-    public void SetUpTest()
-    {
-        mapGenerator mg = new mapGenerator();
-        m = mg.generate();
-
-        int i = 0;
-        character_list  = new ArrayList<>();
-
-        Character testCharacter = new KinesiologyMajor(i++);
-        character_list.add(testCharacter);
-        testCharacter = new ZoologyMajor(i++);
-        character_list.add(testCharacter);
-        testCharacter = new EngineeringMajor(i++);
-        character_list.add(testCharacter);
-        testCharacter = new ChemistryMajor(i++);
-        character_list.add(testCharacter);
-        testCharacter = new BiomedicalMajor(i++);
-        character_list.add(testCharacter);
-        testCharacter = new PhilosophyMajor(i++);
-        character_list.add(testCharacter);
-
-        enemy_list = new ArrayList<>();
-        Character enemy = new Enemy("Enemy", i++, 15, 150, 0, 15, 150, 0, 3, 1);
-        enemy_list.add(enemy);
-        enemy = new Enemy("Enemy", i, 15, 150, 0, 15, 150, 0, 3, 1);
-        enemy_list.add(enemy);
-    }
-
     @Test
     public void testGameStatus()
     {
 
         gameStatus = new GameStatus();
-        gameStatus.players = character_list;
-        gameStatus.enemies = enemy_list;
+        gameStatus.setPlayers(character_list);
+        gameStatus.setEnemies(enemy_list);
 
-        assertSame(character_list, gameStatus.players);
-        assertSame(enemy_list, gameStatus.enemies);
+        assertSame(character_list, gameStatus.getPlayers());
+        assertSame(enemy_list, gameStatus.getEnemies());
     }
 
     @Test
@@ -66,8 +37,8 @@ public class TestGameStatus {
         gameStatus = new GameStatus();
         ArrayList<Character> characters  = new ArrayList<>();
         ArrayList<Character> enemies = new ArrayList<>();
-        gameStatus.players = characters;
-        gameStatus.enemies = enemies;
+        gameStatus.setPlayers(characters);
+        gameStatus.setEnemies(enemies);
 
         mapGenerator mg = new mapGenerator();
         m = mg.generate();
@@ -80,16 +51,16 @@ public class TestGameStatus {
         Character e = new Enemy("Enemy", i++, 15, 150, 0, 15, 150, 0, 3, 1);
         enemies.add(e);
 
-        gameStatus.theMap = m;
+        gameStatus.setCurrentMap(m);
 
-        int attack_before = gameStatus.players.get(0).getAttack();
+        int attack_before = gameStatus.getPlayers().get(0).getAttack();
         int attack_after = 33;
-        gameStatus.players.get(0).setAttack(attack_after);
+        gameStatus.getPlayers().get(0).setAttack(attack_after);
 
-        assertEquals(characters.size(), gameStatus.players.size());
-        assertEquals(enemies.size(), gameStatus.enemies.size());
-        assertNotEquals(attack_before, gameStatus.players.get(0).getAttack());
-        assertEquals(attack_after, gameStatus.players.get(0).getAttack());
+        assertEquals(characters.size(), gameStatus.getPlayers().size());
+        assertEquals(enemies.size(), gameStatus.getEnemies().size());
+        assertNotEquals(attack_before, gameStatus.getPlayers().get(0).getAttack());
+        assertEquals(attack_after, gameStatus.getPlayers().get(0).getAttack());
     }
 
     @Test
@@ -101,10 +72,10 @@ public class TestGameStatus {
         map m1 = mg.generate();
         map m2 = mg.generate();
 
-        gameStatus.theMap = m1;
-        assertNotSame(m2, gameStatus.theMap);
-        gameStatus.theMap = m2;
-        assertSame(m2, gameStatus.theMap);
-        assertNotSame(m1, gameStatus.theMap);
+        gameStatus.setCurrentMap(m1);
+        assertNotSame(m2, gameStatus.getCurrentMap());
+        gameStatus.setCurrentMap(m2);
+        assertSame(m2, gameStatus.getCurrentMap());
+        assertNotSame(m1, gameStatus.getCurrentMap());
     }
 }

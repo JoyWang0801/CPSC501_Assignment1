@@ -29,8 +29,11 @@ public class ChemistryMajor extends Character {
 	@Override
 	protected boolean DoSpecialAttack(int xPos, int yPos, GameStatus gameStatus) {
 		boolean didSomething = false;
-		int choice = gameStatus.theMap.getID(xPos, yPos);
-		for(Character teammate: gameStatus.players) {
+		map theMap = gameStatus.getCurrentMap();
+		ArrayList<Character> players = gameStatus.getPlayers();
+
+		int choice = theMap.getID(xPos, yPos);
+		for(Character teammate: players) {
 			if (choice == teammate.getID()) {
 				teammate.setAttack(teammate.getAttack() + 5);
 				setMana(getMana() - 3);

@@ -27,25 +27,27 @@ public class KinesiologyMajor extends Character {
 	@Override
 	protected boolean DoSpecialAttack(int xPos, int yPos, GameStatus gameStatus) {
 		boolean success = false;
-		int choice = gameStatus.theMap.getID(xPos, yPos);
+		map theMap = gameStatus.getCurrentMap();
+		ArrayList<Character> enemies = gameStatus.getEnemies();
+		int choice = theMap.getID(xPos, yPos);
 		boolean isEnemy = false;
 		int enemyID = 0;
 		int enemyIndex = 0;
-		for(int i = 0; i < gameStatus.enemies.size(); i++) {
+		for(int i = 0; i < enemies.size(); i++) {
 			if(!isEnemy) {
-				enemyID = gameStatus.enemies.get(i).getID();
+				enemyID = enemies.get(i).getID();
 				isEnemy = enemyID == choice;
 				enemyIndex = i;
 			}
 		}
 		if(isEnemy) {
-			int[] enemyPos = gameStatus.theMap.getPos(enemyID);
-			int[] playerPos = gameStatus.theMap.getPos(getID());
+			int[] enemyPos = theMap.getPos(enemyID);
+			int[] playerPos = theMap.getPos(getID());
 			int range = Math.abs(enemyPos[0] - playerPos[0]) + Math.abs(enemyPos[1] - playerPos[1]);
 			if(range <= 1) {
 				int regAttack = getAttack();
 				setAttack(regAttack * 2);
-				attack(gameStatus.enemies.get(enemyIndex));
+				attack(enemies.get(enemyIndex));
 				setAttack(regAttack);
 				setMana(getMana() - 2);
 				success = true;

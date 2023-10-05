@@ -27,45 +27,47 @@ public class EngineeringMajor extends Character {
 	@Override
 	protected boolean DoSpecialAttack(int xPos, int yPos, GameStatus gameStatus) {
 		boolean didSomething = false;
-		int row = gameStatus.theMap.getPos(getID())[1];
-		int col = gameStatus.theMap.getPos(getID())[0];
+		map theMap = gameStatus.getCurrentMap();
+		ArrayList<Character> enemies = gameStatus.getEnemies();
+		int row = theMap.getPos(getID())[1];
+		int col = theMap.getPos(getID())[0];
 
 		//if same position as engineer return false
-		if (this.getID() == gameStatus.theMap.getID(xPos, yPos)) {
+		if (this.getID() == theMap.getID(xPos, yPos)) {
 			didSomething = false;
 
 			//if column
-		} else if (gameStatus.theMap.getPos(this.getID())[0] == xPos) {
+		} else if (theMap.getPos(this.getID())[0] == xPos) {
 
 			//if above
-			for(int each = 0; each < gameStatus.enemies.size(); each++) {
-				if(gameStatus.theMap.getPos(gameStatus.enemies.get(each).getID())[0] == col && gameStatus.theMap.getPos(gameStatus.enemies.get(each).getID())[1] < gameStatus.theMap.getPos(this.getID())[1]) {
-					attack(gameStatus.enemies.get(each));
+			for(int each = 0; each < enemies.size(); each++) {
+				if(theMap.getPos(enemies.get(each).getID())[0] == col && theMap.getPos(enemies.get(each).getID())[1] < theMap.getPos(this.getID())[1]) {
+					attack(enemies.get(each));
 					System.out.println("I attacked");
 				}
 			}
 
 			//if below
-			for(int each = 0; each < gameStatus.enemies.size(); each++) {
-				if(gameStatus.theMap.getPos(gameStatus.enemies.get(each).getID())[0] == col && gameStatus.theMap.getPos(gameStatus.enemies.get(each).getID())[1] > gameStatus.theMap.getPos(this.getID())[1]) {
-					attack(gameStatus.enemies.get(each));
+			for(int each = 0; each < enemies.size(); each++) {
+				if(theMap.getPos(enemies.get(each).getID())[0] == col && theMap.getPos(enemies.get(each).getID())[1] > theMap.getPos(this.getID())[1]) {
+					attack(enemies.get(each));
 				}
 			}
 			didSomething = true;
 			//if row
-		} else if (gameStatus.theMap.getPos(this.getID())[1] == yPos) {
+		} else if (theMap.getPos(this.getID())[1] == yPos) {
 
 			//if left
-			for(int each = 0; each < gameStatus.enemies.size(); each++) {
-				if(gameStatus.theMap.getPos(gameStatus.enemies.get(each).getID())[1] == row && gameStatus.theMap.getPos(gameStatus.enemies.get(each).getID())[0] < gameStatus.theMap.getPos(this.getID())[0]) {
-					attack(gameStatus.enemies.get(each));
+			for(int each = 0; each < enemies.size(); each++) {
+				if(theMap.getPos(enemies.get(each).getID())[1] == row && theMap.getPos(enemies.get(each).getID())[0] < theMap.getPos(this.getID())[0]) {
+					attack(enemies.get(each));
 				}
 			}
 
 			//if right
-			for(int each = 0; each < gameStatus.enemies.size(); each++) {
-				if(gameStatus.theMap.getPos(gameStatus.enemies.get(each).getID())[1] == row && gameStatus.theMap.getPos(gameStatus.enemies.get(each).getID())[0] > gameStatus.theMap.getPos(this.getID())[0]) {
-					attack(gameStatus.enemies.get(each));
+			for(int each = 0; each < enemies.size(); each++) {
+				if(theMap.getPos(enemies.get(each).getID())[1] == row && theMap.getPos(enemies.get(each).getID())[0] > theMap.getPos(this.getID())[0]) {
+					attack(enemies.get(each));
 				}
 			}
 			didSomething = true;

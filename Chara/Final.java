@@ -26,10 +26,13 @@ package Chara;
 		protected boolean DoSpecialAttack(int xPos, int yPos, GameStatus gameStatus) {
 			//these two for loops check each spot around the final
 			boolean didSomething = false;
+			map theMap = gameStatus.getCurrentMap();
+			ArrayList<Character> players = gameStatus.getPlayers();
+
 			for (int a = -1; a < 2; a++) {
 				for (int b = -1; b < 2; b++) {
-					int zoneX = gameStatus.theMap.getPos(this.getID())[0] + a;
-					int zoneY = gameStatus.theMap.getPos(this.getID())[1] + b;
+					int zoneX =   theMap.getPos(this.getID())[0] + a;
+					int zoneY =   theMap.getPos(this.getID())[1] + b;
 					int[] zone = new int[2];
 					zone[0] = zoneX;
 					zone[1] = zoneY;
@@ -37,11 +40,11 @@ package Chara;
 					/* this for loop checks if any player is in the spot being
 					 * checked and attacks them three times if it is */
 
-					for(int i = 0; i < gameStatus.players.size(); i++) {
-						if((gameStatus.theMap.getPos(gameStatus.players.get(i).getID())[0] == zone[0]) && (gameStatus.theMap.getPos(gameStatus.players.get(i).getID())[1] == zone[1])) {
-							attack(gameStatus.players.get(i));
-							attack(gameStatus.players.get(i));
-							attack(gameStatus.players.get(i));
+					for(int i = 0; i <   players.size(); i++) {
+						if((theMap.getPos(players.get(i).getID())[0] == zone[0]) && (theMap.getPos(players.get(i).getID())[1] == zone[1])) {
+							attack(players.get(i));
+							attack(players.get(i));
+							attack(players.get(i));
 						}
 					}
 				}

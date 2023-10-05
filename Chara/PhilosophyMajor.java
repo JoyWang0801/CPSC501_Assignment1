@@ -29,10 +29,12 @@ public class PhilosophyMajor extends Character {
 	@Override
 	protected boolean DoSpecialAttack(int xPos, int yPos, GameStatus gameStatus) {
 		boolean didSomething = false;
-		int choice = gameStatus.theMap.getID(xPos, yPos);
-		for(Character foe: gameStatus.enemies) {
+		map theMap = gameStatus.getCurrentMap();
+		ArrayList<Character> enemies = gameStatus.getEnemies();
+		int choice = theMap.getID(xPos, yPos);
+		for(Character foe: enemies) {
 			if (choice == foe.getID()) {
-				gameStatus.enemies.get(choice).setAttack(gameStatus.enemies.get(choice).getAttack() - 5);
+				enemies.get(choice).setAttack(enemies.get(choice).getAttack() - 5);
 				setMana(getMana() - 2);
 				didSomething = true;
 			}

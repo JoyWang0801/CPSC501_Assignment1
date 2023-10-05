@@ -1,9 +1,5 @@
 package Chara;
-import java.util.ArrayList;
-
 import main.GameStatus;
-import main.map;
-
 
 public class ZoologyMajor extends Character {
 
@@ -28,7 +24,7 @@ public class ZoologyMajor extends Character {
 	protected boolean DoSpecialAttack(int xPos, int yPos, GameStatus gameStatus) {
 		boolean didSomething = false;
 
-		didSomething = gameStatus.theMap.move(this.getID(), xPos, yPos, this.getRange());
+		didSomething = gameStatus.getCurrentMap().move(this.getID(), xPos, yPos, this.getRange());
 		if (didSomething == true) {
 			setMana(getMana() - 2);
 		}

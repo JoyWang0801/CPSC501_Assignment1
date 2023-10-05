@@ -26,8 +26,8 @@ public class Game {
 		map[] worldMap = {genMap.generate(), genMap.generate(), genMap.generate()}; //create three random maps to act as the whole world
 		ArrayList<Character> players = new ArrayList<Character>(); //create a list to hold all player characters between iteration of map
 		ArrayList<Character> enemies = new ArrayList<Character>(); //create a list to hold all enemies between iterations
-		gameStatus.players = players;
-		gameStatus.enemies = enemies;
+		gameStatus.setPlayers(players);
+		gameStatus.setEnemies(enemies);
 		//make some default characters
 		Character toAdd = new KinesiologyMajor(1); //new close combat kines character (magic numbers are a bandaid right now)
 		players.add(toAdd);//put them into the player character list
@@ -37,7 +37,7 @@ public class Game {
 		players.add(toAdd);
 		boolean stillAlive = true; //boolean to keep track of the player list - if its empty the boolean is false
 		for(map Map: worldMap) {// going through all maps in the world
-			gameStatus.theMap = Map;
+			gameStatus.setCurrentMap(Map);
 			if(stillAlive) {// if the players havent died yet
 				System.out.println("Enter an integer to go to the next map");//a sort of between map pause screen, so it doesn't just pop into another map after one is beaten
 				enemies = new ArrayList<Character>(); //initialize a new enemy list for a new map
@@ -60,7 +60,7 @@ public class Game {
 	 *
 	 *	@param players - list of player characters that end up in special spaces on the map
 	 *	@param enemies - list of enemy characters that get their own spaces
-	 *	@param map - the map to populate
+	 *	@param Map - the map to populate
 	 */
 	private static void populateMap(ArrayList<Character> players, ArrayList<Character> enemies, map Map) {
 		int[] test = Map.getCharPos();// get default instatiated character position list

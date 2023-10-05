@@ -49,9 +49,9 @@ public class TestCharacterSpecial {
         enemy_list.add(enemy);
 
         game_status = new GameStatus();
-        game_status.players = character_list;
-        game_status.enemies = enemy_list;
-        game_status.theMap = m;
+        game_status.setPlayers(character_list);
+        game_status.setEnemies(enemy_list);
+        game_status.setCurrentMap(m);
 
         // making sure all characters are initiated
         character_list_size = character_list.size();
@@ -184,8 +184,8 @@ public class TestCharacterSpecial {
     @Test
     public void testBiomedicalSpecial()
     {
-        Character current_character = game_status.players.get(4);
-        Character alias = game_status.players.get(2);
+        Character current_character = game_status.getPlayers().get(4);
+        Character alias = game_status.getPlayers().get(2);
 
         m.setPos(current_character.getID(), 6, 6);
         m.setPos(alias.getID(), 6, 7);
@@ -268,7 +268,7 @@ public class TestCharacterSpecial {
     @Test
     public void testEnemyFinalSpecial()
     {
-        Character current_character = game_status.players.get(5);
+        Character current_character = game_status.getPlayers().get(5);
         Character enemy = new Final("Final", 9, 15, 150, 0, 15, 150, 0, 3, 1);
 
         m.setPos(current_character.getID(), 6, 6);

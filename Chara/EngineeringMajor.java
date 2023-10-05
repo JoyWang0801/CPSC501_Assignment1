@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import main.map;
 
 
-public class EngMajor extends Character {
+public class EngineeringMajor extends Character {
 	
 		
 		//constructor
-		public EngMajor(int id) {
+		public EngineeringMajor(int id) {
 			super("Engineering Major", id, 20, 200, 3, 20, 200, 5, 4, 4, "This special move attacks any enemies in the same chosen column or row as the Engineering Major (costs 3 mana). Select a tile in the same row or column as the engineering major to decide the direction to attack");
 		}
 	

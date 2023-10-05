@@ -4,7 +4,7 @@ import java.util.Scanner;
 import Chara.BiomedicalMajor;
 import Chara.Character;
 import Chara.Enemy;
-import Chara.EngMajor;
+import Chara.EngineeringMajor;
 import Chara.KinesiologyMajor;
 import item.EmptyItem;
 import item.HealthPotion;
@@ -31,7 +31,7 @@ public class Game {
 		//make some default characters
 		Character toAdd = new KinesiologyMajor(1); //new close combat kines character (magic numbers are a bandaid right now)
 		players.add(toAdd);//put them into the player character list
-		toAdd = new EngMajor(2);//new ranged eng character
+		toAdd = new EngineeringMajor(2);//new ranged eng character
 		players.add(toAdd);
 		toAdd = new BiomedicalMajor(3);//new healer biomed character
 		players.add(toAdd);

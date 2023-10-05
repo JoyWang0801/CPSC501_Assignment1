@@ -115,11 +115,7 @@ public abstract class Character {
 	public int getID() {
 		return ID;
 	}
-	
-	public void setName(String i) {
-		name = i;
-	}
-	
+
 	public String getName() {
 		return name;
 	}

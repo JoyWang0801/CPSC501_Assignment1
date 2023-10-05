@@ -1,5 +1,5 @@
 package item;
-import Chara.*;
+import Chara.Character;
 
 public abstract class Item {
 private  int ID;
@@ -29,7 +29,7 @@ public void setName(String aName) {
 	name = aName;
 }
 
-public abstract boolean use(Chara c);
+public abstract boolean use(Character c);
 
 
 }

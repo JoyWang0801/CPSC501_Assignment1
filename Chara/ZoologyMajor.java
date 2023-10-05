@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import main.map;
 
 
-public class ZoologyMajor extends Chara {
+public class ZoologyMajor extends Character {
 
 	
 	//constructor
@@ -15,7 +15,7 @@ public class ZoologyMajor extends Chara {
 	//methods
 	
 	//Special allows the ZoologyMajor Character to take a second movement action
-	public boolean Special(map theMap, ArrayList<Chara> players, ArrayList<Chara> enemies, int xPos, int yPos) {
+	public boolean Special(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos) {
 		boolean didSomething = false;
 		if (getMana() < 2) {
 			System.out.println("This special requires 2 mana");

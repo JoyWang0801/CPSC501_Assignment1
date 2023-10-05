@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import main.map;
 
 
-public class EngMajor extends Chara {
+public class EngMajor extends Character {
 	
 		
 		//constructor
@@ -14,7 +14,7 @@ public class EngMajor extends Chara {
 		}
 	
 	//this special attacks any enemies in the same row as the engineer
-	public boolean Special(map theMap, ArrayList<Chara> players, ArrayList<Chara> enemies, int xPos, int yPos) {
+	public boolean Special(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos) {
 		boolean didSomething = false;
 		int row = theMap.getPos(getID())[1];
 		int col = theMap.getPos(getID())[0];

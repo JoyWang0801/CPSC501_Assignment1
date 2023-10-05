@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import main.map;
 
 
-public class KinesiologyMajor extends Chara {
+public class KinesiologyMajor extends Character {
 
 
 			
@@ -17,7 +17,7 @@ public class KinesiologyMajor extends Chara {
 	//methods
 	
 	//this special deals a close-by enemy a large amount of damage
-	public boolean Special(map theMap, ArrayList<Chara> players, ArrayList<Chara> enemies, int xPos, int yPos) {
+	public boolean Special(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos) {
 		boolean didSomething = false;
 		if(getMana() < 2) System.out.println("This special requires 2 mana");
 		else {

@@ -1,5 +1,6 @@
 package item;
-import Chara.*;
+import Chara.Character;
+
 public class AttackPotion extends Item{
 
 	public AttackPotion() {
@@ -7,7 +8,7 @@ public class AttackPotion extends Item{
 	}
 	
 	//AttackPotion raises the users attack value by 10
-	public boolean use(Chara c) {
+	public boolean use(Character c) {
 		c.setAttack(c.getAttack() + 10);
 		return true;
 	}

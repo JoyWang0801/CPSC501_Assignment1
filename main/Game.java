@@ -2,15 +2,15 @@ package main;
 import java.util.Scanner;
 
 import Chara.BiomedMajor;
+import Chara.Character;
 import Chara.Enemy;
 import Chara.EngMajor;
 import Chara.KinesiologyMajor;
 import item.EmptyItem;
 import item.HealthPotion;
 
-import java.math.*;
 import java.util.ArrayList;
-import Chara.*;
+
 import item.*;
 public class Game {
 
@@ -26,10 +26,10 @@ public class Game {
 	 */
 	private static void playGame() {
 		map[] worldMap = {genMap.generate(), genMap.generate(), genMap.generate()}; //create three random maps to act as the whole world
-		ArrayList<Chara> players = new ArrayList<Chara>(); //create a list to hold all player characters between iteration of map
-		ArrayList<Chara> enemies = new ArrayList<Chara>(); //create a list to hold all enemies between iterations
+		ArrayList<Character> players = new ArrayList<Character>(); //create a list to hold all player characters between iteration of map
+		ArrayList<Character> enemies = new ArrayList<Character>(); //create a list to hold all enemies between iterations
 		//make some default characters
-		Chara toAdd = new KinesiologyMajor(1); //new close combat kines character (magic numbers are a bandaid right now)
+		Character toAdd = new KinesiologyMajor(1); //new close combat kines character (magic numbers are a bandaid right now)
 		players.add(toAdd);//put them into the player character list
 		toAdd = new EngMajor(2);//new ranged eng character
 		players.add(toAdd);
@@ -39,7 +39,7 @@ public class Game {
 		for(map Map: worldMap) {// going through all maps in the world
 			if(stillAlive) {// if the players havent died yet
 				System.out.println("Enter an integer to go to the next map");//a sort of between map pause screen, so it doesn't just pop into another map after one is beaten
-				enemies = new ArrayList<Chara>(); //initialize a new enemy list for a new map
+				enemies = new ArrayList<Character>(); //initialize a new enemy list for a new map
 				for(int i = 4; i <= 6; i++) {//put some generic enemies in the enemy list
 					toAdd = new Enemy("Enemy", i, 15, 150, 0, 15, 150, 0, 3, 1);
 					enemies.add(toAdd);
@@ -61,7 +61,7 @@ public class Game {
 	 *	@param enemies - list of enemy characters that get their own spaces
 	 *	@param map - the map to populate
 	 */
-	private static void populateMap(ArrayList<Chara> players, ArrayList<Chara> enemies, map Map) {
+	private static void populateMap(ArrayList<Character> players, ArrayList<Character> enemies, map Map) {
 		int[] test = Map.getCharPos();// get default instatiated character position list
 		int[] test2 = Map.getEnemyPos();// get default enemy posiyions
 		for(int i = 0; i < players.size(); i++) {//for all player characters
@@ -79,9 +79,9 @@ public class Game {
 	 *
 	 *	@param players - the player list to restore mana to
 	 */
-	private static void turnMana(ArrayList<Chara> players) {
+	private static void turnMana(ArrayList<Character> players) {
 		for(int i = 0; i < players.size(); i++) {
-			Chara currentPlayer = players.get(i);
+			Character currentPlayer = players.get(i);
 			currentPlayer.setMana(currentPlayer.getMana() + 1);
 		}
 	}
@@ -93,7 +93,7 @@ public class Game {
 	 *	@param currentMap - the map to play on
 	 *	@return boolean that reflects the status of the players (all dead means it returns false)
 	 */
-	private static boolean playMap(ArrayList<Chara> players, ArrayList<Chara> enemies, map currentMap) {
+	private static boolean playMap(ArrayList<Character> players, ArrayList<Character> enemies, map currentMap) {
 		int turnCounter = 1;//numer to reflect turn
 		AI enemyAI = new AI(currentMap);//create a new AI based on the current map iteration
 		boolean playersAlive = players.size() > 0, enemiesAlive = enemies.size() > 0;//booleans to facilitate turn execution (if some team dies then you can't execute their turn)
@@ -109,13 +109,13 @@ public class Game {
 			enemiesAlive = enemies.size() > 0;//check to make sure the opponentss are still alive so they can execute their turn
 			if(enemiesAlive && playersAlive) {//if the enemies are still alive and have players to attack
 				for(int i = 0; i < enemies.size(); i++) {//for each enemy in the list of enemies
-					Chara currentEnemy = enemies.get(i);//get the current enemy in the list
+					Character currentEnemy = enemies.get(i);//get the current enemy in the list
 					ArrayList<Integer> playerIDs = new ArrayList<Integer>();//create a list to get the IDs of players to pass into AI
 					for(int j = 0; j < players.size(); j++) {//fill the player ID list
 						playerIDs.add(new Integer(players.get(j).getID())); 
 					}
 					enemyAI.moveAITowards(currentEnemy.getID(), currentEnemy.getMove(), playerIDs); //move all enemies toward the players (all enemies are aggressive for now)
-					Chara closestPlayer = getCharaFromID(enemyAI.checkClosest(currentEnemy.getID(), playerIDs), players); //get the character closest to the enemy
+					Character closestPlayer = getCharaFromID(enemyAI.checkClosest(currentEnemy.getID(), playerIDs), players); //get the character closest to the enemy
 					if (isLegalAttack(closestPlayer, currentEnemy, currentMap)) currentEnemy.attack(closestPlayer); //if possible to attack, attack
 					killChecker(players, currentMap);//check to see if the enemy killed a player
 				}
@@ -126,9 +126,9 @@ public class Game {
 		return playersAlive;//once a team dies loop is broken - return the state of players
 	}
 
-	private static void playerTurn(ArrayList<Chara> players, ArrayList<Chara> enemies, map currentMap) {
-		ArrayList<Chara> playersDidntMove = new ArrayList<Chara>(players);
-		ArrayList<Chara> playersDidntAct = new ArrayList<Chara>(players);
+	private static void playerTurn(ArrayList<Character> players, ArrayList<Character> enemies, map currentMap) {
+		ArrayList<Character> playersDidntMove = new ArrayList<Character>(players);
+		ArrayList<Character> playersDidntAct = new ArrayList<Character>(players);
 		boolean notAllMoved = playersDidntMove.size() > 0, notAllActed = playersDidntAct.size() > 0;
 			while(notAllMoved || notAllActed) {
 				if(notAllMoved) System.out.println("Enter 1 to move a character");
@@ -152,7 +152,7 @@ public class Game {
 			}
 	}
 	
-	private static void playerMove(ArrayList<Chara> players, ArrayList<Chara> didntMove, map currentMap) {
+	private static void playerMove(ArrayList<Character> players, ArrayList<Character> didntMove, map currentMap) {
 		System.out.println("These characters can move: ");
 		for(int i = 0; i < didntMove.size(); i++) {
 			System.out.print("ID: " + didntMove.get(i).getID() + " ");
@@ -166,7 +166,7 @@ public class Game {
 		}
 	}
 	
-	private static void playerAct(ArrayList<Chara> players, ArrayList<Chara> didntAct, ArrayList<Chara> enemies, map currentMap) {
+	private static void playerAct(ArrayList<Character> players, ArrayList<Character> didntAct, ArrayList<Character> enemies, map currentMap) {
 		System.out.println("These characters can act");
 		for(int i = 0; i < didntAct.size(); i++) {
 			System.out.print("ID: " + didntAct.get(i).getID() + " ");
@@ -195,7 +195,7 @@ public class Game {
 		}
 	}
 	
-	private static boolean doMove(Chara charToMove, map currentMap) {
+	private static boolean doMove(Character charToMove, map currentMap) {
 		boolean didMove = false;
 		System.out.println("Enter the x coordinate you want to move to");
 		int newX = userIn.nextInt();
@@ -212,11 +212,11 @@ public class Game {
 	 * @param currentMap	map the player and enemies sit on
 	 * @return	boolean for successful attack
 	 */
-	private static boolean doAttack(Chara attacker, ArrayList<Chara> enemiesList, map currentMap) {
+	private static boolean doAttack(Character attacker, ArrayList<Character> enemiesList, map currentMap) {
 		System.out.println("You can attack in a range of " + attacker.getRange());
 		System.out.println("Enter the ID of an enemy to attack");
 		int choice = userIn.nextInt();
-		Chara receiver = getCharaFromID(choice, enemiesList);
+		Character receiver = getCharaFromID(choice, enemiesList);
 		boolean didAttack = false;
 		if (checkIfIDInList(choice, enemiesList)) {
 			if (isLegalAttack(attacker, receiver, currentMap)) {
@@ -237,7 +237,7 @@ public class Game {
 	 * @param currentMap	the map the two caracters sit on
 	 * @return	boolean if attacker is in range of receiver
 	 */
-	private static boolean isLegalAttack(Chara attacker, Chara receiver, map currentMap) {
+	private static boolean isLegalAttack(Character attacker, Character receiver, map currentMap) {
 		int atkRange = attacker.getRange();
 		int[] atkPos = currentMap.getPos(attacker.getID());
 		int[] recPos = currentMap.getPos(receiver.getID());
@@ -255,23 +255,23 @@ public class Game {
 	 * @param listContainingChar	the list the belong to that holds members (players, enemies)
 	 * @param currentMap	the map the characters are on
 	 */
-	public static void kill(int IDToKill, int posToKill, ArrayList<Chara> listContainingChar, map currentMap) {
+	public static void kill(int IDToKill, int posToKill, ArrayList<Character> listContainingChar, map currentMap) {
 		System.out.println(listContainingChar.get(posToKill).getName() + " died!");
 		int[] killCoords = currentMap.getPos(IDToKill);
 		currentMap.setPos(0, killCoords[0], killCoords[1]);
 		listContainingChar.remove(posToKill);
 	}
 	
-	public static void killChecker(ArrayList<Chara> chars, map currentMap) {
+	public static void killChecker(ArrayList<Character> chars, map currentMap) {
 		for(int i = 0; i < chars.size(); i++) {
-			Chara dead = chars.get(i);
+			Character dead = chars.get(i);
 			if(dead.getHealth() <= 0) {
 				kill(dead.getID(), i, chars, currentMap);
 			}
 		}
 	}
 	
-	private static boolean useSpecial(Chara player, ArrayList<Chara> players, ArrayList<Chara> enemies, map currentMap) {
+	private static boolean useSpecial(Character player, ArrayList<Character> players, ArrayList<Character> enemies, map currentMap) {
 		boolean used = false;
 		
 		//first display the Special Description
@@ -288,7 +288,7 @@ public class Game {
 		return used;
 	}
 	
-	private static boolean useItem(Chara user) {
+	private static boolean useItem(Character user) {
 		System.out.println("Enter a number to use item");
 		for (int i = 0; i < 3; i++) {
 			System.out.println("" + (i + 1) + ". " + user.getItem(i).getName());
@@ -314,7 +314,7 @@ public class Game {
 		return itemWasUsed;
 	}
 	
-	private static boolean pickUpItem(Chara user, Item toAdd) {
+	private static boolean pickUpItem(Character user, Item toAdd) {
 		boolean pickedUp = false;
 		for(int i = 0; i < 3; i++) {
 			if(!pickedUp) {
@@ -327,7 +327,7 @@ public class Game {
 		return pickedUp;
 	}
 	
-	private static boolean interact(Chara user, map currentMap) {
+	private static boolean interact(Character user, map currentMap) {
 		boolean didSomething = false;
 		System.out.println("Enter the ID of an item on the map you would like to pick up");
 		int choice = userIn.nextInt();
@@ -346,15 +346,15 @@ public class Game {
 		return didSomething;
 	}
 	
-	public static Chara getCharaFromID(int ID, ArrayList<Chara> listToCheck) {
-		Chara toReturn = null;
+	public static Character getCharaFromID(int ID, ArrayList<Character> listToCheck) {
+		Character toReturn = null;
 		for(int i = 0; i < listToCheck.size(); i++) {
 			if (listToCheck.get(i).getID() == ID) toReturn = listToCheck.get(i);
 		}
 		return toReturn;
 	}
 	
-	public static boolean checkIfIDInList(int ID, ArrayList<Chara> listToCheck) {
+	public static boolean checkIfIDInList(int ID, ArrayList<Character> listToCheck) {
 		boolean isThere = false;
 		for(int i = 0; i < listToCheck.size(); i++) {
 			if (!isThere) {
@@ -364,9 +364,9 @@ public class Game {
 		return isThere;
 	}
 	
-	public static void printListOfChars(ArrayList<Chara> chars, boolean arePlayers) {
+	public static void printListOfChars(ArrayList<Character> chars, boolean arePlayers) {
 		for(int i = 0; i < chars.size(); i++) {
-			Chara theChar = chars.get(i);
+			Character theChar = chars.get(i);
 			System.out.print(
 					theChar.getName()
 					+ " (ID: " + theChar.getID()

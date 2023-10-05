@@ -1,6 +1,8 @@
 package item;
 import java.util.Random;
-import Chara.*;
+
+import Chara.Character;
+
 public class RandomPotion extends Item{
 
 	public RandomPotion() {
@@ -8,7 +10,7 @@ public class RandomPotion extends Item{
 	}
 	
 	//RandomPotion raises the Health and Mana of the user by a random amount
-	public boolean use(Chara c) {
+	public boolean use(Character c) {
 		Random rand = new Random();
 		int hlthGain = rand.nextInt(15);
 		int manaGain = rand.nextInt(3);

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import main.map;
 
 
-public class PhilosophyMajor extends Chara {
+public class PhilosophyMajor extends Character {
 	
 	
 	//constructor
@@ -16,13 +16,13 @@ public class PhilosophyMajor extends Chara {
 	//methods
 	
 	//this special lowers the attack of an enemy
-	public boolean Special(map theMap, ArrayList<Chara> players, ArrayList<Chara> enemies, int xPos, int yPos) {
+	public boolean Special(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos) {
 		boolean didSomething = false;
 		if(getMana() < 2)
 			{System.out.println("This special requires 2 mana");}
 		else {
 			int choice = theMap.getID(xPos, yPos);
-			for(Chara foe: enemies) {
+			for(Character foe: enemies) {
 				if (choice == foe.getID()) {
 					enemies.get(choice).setAttack(enemies.get(choice).getAttack() - 5);
 					setMana(getMana() - 2);

@@ -1,10 +1,9 @@
 package Chara;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import main.map;
 
-public class BiomedMajor extends Chara {
+public class BiomedMajor extends Character {
 	
 	//instance variables
 	
@@ -18,7 +17,7 @@ super("Biomedical Major", id, 10, 250, 3, 10, 250, 7, 4, 1, "This special boosts
 	//methods
 	
 	//this special boosts the health of a near-by ally
-	public boolean Special(map theMap, ArrayList<Chara> players, ArrayList<Chara> enemies, int xPos, int yPos) {
+	public boolean Special(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos) {
 		boolean didSomething = false;
 		if(getMana() < 3) System.out.println("This special requires 3 mana to use");
 		else {
@@ -39,7 +38,7 @@ super("Biomedical Major", id, 10, 250, 3, 10, 250, 7, 4, 1, "This special boosts
 				int[] healerPos = theMap.getPos(getID());
 				int range = Math.abs(healerPos[0] - playerPos[0]) + Math.abs(healerPos[1] - playerPos[1]);
 				if(range <= 3) {
-					Chara healed = players.get(playerIndex);
+					Character healed = players.get(playerIndex);
 					healed.setHealth(healed.getHealth() + 40);
 					setMana(getMana() - 3);
 					didSomething = true;

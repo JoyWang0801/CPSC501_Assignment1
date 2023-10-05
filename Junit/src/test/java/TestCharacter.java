@@ -1,6 +1,7 @@
 package Junit.src.test.java;
 
 import Chara.*;
+import Chara.Character;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -11,7 +12,7 @@ import static org.junit.Assert.*;
 
 public class TestCharacter {
 
-    static ArrayList<Chara> character_list;
+    static ArrayList<Character> character_list;
     int list_size;
 
     @BeforeClass
@@ -20,18 +21,18 @@ public class TestCharacter {
         int i = 0;
         character_list  = new ArrayList<>();
 
-        Chara TestCharacter = new KinesiologyMajor(i++);
-        character_list.add(TestCharacter);
-        TestCharacter = new ZoologyMajor(i++);
-        character_list.add(TestCharacter);
-        TestCharacter = new EngMajor(i++);
-        character_list.add(TestCharacter);
-        TestCharacter = new ChemistryMajor(i++);
-        character_list.add(TestCharacter);
-        TestCharacter = new BiomedMajor(i++);
-        character_list.add(TestCharacter);
-        TestCharacter = new PhilosophyMajor(i++);
-        character_list.add(TestCharacter);
+        Character testCharacter = new KinesiologyMajor(i++);
+        character_list.add(testCharacter);
+        testCharacter = new ZoologyMajor(i++);
+        character_list.add(testCharacter);
+        testCharacter = new EngMajor(i++);
+        character_list.add(testCharacter);
+        testCharacter = new ChemistryMajor(i++);
+        character_list.add(testCharacter);
+        testCharacter = new BiomedMajor(i++);
+        character_list.add(testCharacter);
+        testCharacter = new PhilosophyMajor(i++);
+        character_list.add(testCharacter);
     }
 
     @Before
@@ -58,7 +59,7 @@ public class TestCharacter {
     @Test
     public void testHealth()
     {
-        for(Chara currentCharacter : character_list)
+        for(Character currentCharacter : character_list)
         {
             int health = currentCharacter.getHealth();
             String msg = "Testing " + currentCharacter.getName();
@@ -72,7 +73,7 @@ public class TestCharacter {
     @Test
     public void testHealthExceedMaxHealth()
     {
-        for(Chara currentCharacter : character_list)
+        for(Character currentCharacter : character_list)
         {
             int maxHealth = currentCharacter.getMaxHealth();
             String msg = "Testing " + currentCharacter.getName();
@@ -86,7 +87,7 @@ public class TestCharacter {
     @Test
     public void testSetNewMaxHealth()
     {
-        for(Chara currentCharacter : character_list)
+        for(Character currentCharacter : character_list)
         {
             int health = currentCharacter.getHealth();
             int maxHealth = currentCharacter.getMaxHealth();
@@ -103,7 +104,7 @@ public class TestCharacter {
     @Test
     public void testSetMaxHealthBelowCurrentHealth()
     {
-        for(Chara currentCharacter : character_list)
+        for(Character currentCharacter : character_list)
         {
             int health = currentCharacter.getHealth();
             int maxHealth = currentCharacter.getMaxHealth();
@@ -122,7 +123,7 @@ public class TestCharacter {
     @Test
     public void testMana()
     {
-        for(Chara currentCharacter : character_list)
+        for(Character currentCharacter : character_list)
         {
             String msg = "Testing " + currentCharacter.getName();
             int mana = currentCharacter.getMana();
@@ -134,7 +135,7 @@ public class TestCharacter {
     @Test
     public void testManaExceedMaxMana()
     {
-        for(Chara currentCharacter : character_list)
+        for(Character currentCharacter : character_list)
         {
             String msg = "Testing " + currentCharacter.getName();
             int maxMana = currentCharacter.getMaxMana();
@@ -147,7 +148,7 @@ public class TestCharacter {
     @Test
     public void testMaxMana()
     {
-        for(Chara currentCharacter : character_list)
+        for(Character currentCharacter : character_list)
         {
             String msg = "Testing " + currentCharacter.getName();
             int maxMana = currentCharacter.getMaxMana();
@@ -161,7 +162,7 @@ public class TestCharacter {
     @Test
     public void testNegativeMaxMana()
     {
-        for(Chara currentCharacter : character_list)
+        for(Character currentCharacter : character_list)
         {
             String msg = "Testing " + currentCharacter.getName();
             // test mana number negative
@@ -174,7 +175,7 @@ public class TestCharacter {
     @Test
     public void tesAttack()
     {
-        for(Chara currentCharacter : character_list)
+        for(Character currentCharacter : character_list)
         {
             String msg = "Testing " + currentCharacter.getName();
             int attack = currentCharacter.getAttack();
@@ -186,7 +187,7 @@ public class TestCharacter {
     @Test
     public void testMaxAttack()
     {
-        for(Chara currentCharacter : character_list)
+        for(Character currentCharacter : character_list)
         {
             String msg = "Testing " + currentCharacter.getName();
             int maxAttack = currentCharacter.getMaxAttack();
@@ -198,7 +199,7 @@ public class TestCharacter {
     @Test
     public void testMaxAttackBelowCurrentAttack()
     {
-        for(Chara currentCharacter : character_list )
+        for(Character currentCharacter : character_list )
         {
             String msg = "Testing " + currentCharacter.getName();
             int maxAttack = currentCharacter.getMaxAttack();
@@ -217,8 +218,8 @@ public class TestCharacter {
     {
         for(int i = 0; i < character_list.size() - 1; i++)
         {
-            Chara attackter = character_list.get(i);
-            Chara victim = character_list.get( (i + 1) % character_list.size());
+            Character attackter = character_list.get(i);
+            Character victim = character_list.get( (i + 1) % character_list.size());
             String msg = attackter.getName() + " attacks " + victim.getName();
 
             int attacker_health = attackter.getHealth();

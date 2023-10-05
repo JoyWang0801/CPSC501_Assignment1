@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 import main.map;
 
-public class Enemy extends Chara{
+public class Enemy extends Character {
 		
 	public Enemy(String name, int id, int att, int health, int mana, 
 			int maxAtt, int maxHealth, int maxMana, int move, int range) {
@@ -14,7 +14,7 @@ public class Enemy extends Chara{
 	 * instead, they simply return that the special 
 	 * cannot be used at all times	*/
 		
-	public boolean Special(map theMap, ArrayList<Chara> players, ArrayList<Chara> enemies, int xPos, int yPos) {
+	public boolean Special(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos) {
 		return false;
 	}
 }

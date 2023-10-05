@@ -1,5 +1,6 @@
 package item;
-import Chara.*;
+import Chara.Character;
+
 public class MovementPotion extends Item{
 
 	public MovementPotion() {
@@ -7,7 +8,7 @@ public class MovementPotion extends Item{
 	}
 	
 	//increases the users movement by two permenently
-	public boolean use(Chara c) {
+	public boolean use(Character c) {
 		c.setMove(c.getMove() + 2);
 		return true;
 	}

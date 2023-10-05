@@ -2,7 +2,7 @@ package Chara;
 import java.util.ArrayList;
 import item.*;
 import main.*;
-public abstract class Chara {
+public abstract class Character {
 	
 	//instance variables
 	private int health;
@@ -19,10 +19,10 @@ public abstract class Chara {
 	private String specDesc = "No special description";
 	
 	//constructors
-	public Chara() {
+	public Character() {
 		
 	}
-	public Chara(String name, int id, int att, int health, int mana, int maxAtt, int maxHealth, int maxMana, int move, int range, String specDesc) {
+	public Character(String name, int id, int att, int health, int mana, int maxAtt, int maxHealth, int maxMana, int move, int range, String specDesc) {
 		this.name = new String(name);
 		this.ID = id;
 		setMove(move);
@@ -128,9 +128,9 @@ public abstract class Chara {
 		return specDesc;
 	}
 	
-	public abstract boolean Special(map theMap, ArrayList<Chara> players, ArrayList<Chara> enemies, int xPos, int yPos);
+	public abstract boolean Special(map theMap, ArrayList<Character> players, ArrayList<Character> enemies, int xPos, int yPos);
 	
-	public void attack(Chara receiver) {
+	public void attack(Character receiver) {
 		receiver.setHealth(receiver.getHealth() - getAttack());
 	}
 }

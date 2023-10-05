@@ -1,5 +1,6 @@
 package item;
-import Chara.*;
+import Chara.Character;
+
 public class ManaPotion extends Item{
 
 	public ManaPotion() {
@@ -7,7 +8,7 @@ public class ManaPotion extends Item{
 	}
 	
 	//increases users mana points by 3
-	public boolean use(Chara c) {
+	public boolean use(Character c) {
 		c.setMana(c.getMana() + 3);
 		return true;
 	}

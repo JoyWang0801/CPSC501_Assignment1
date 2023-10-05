@@ -23,7 +23,7 @@ public abstract class Character {
 		
 	}
 	public Character(String name, int id, int att, int health, int mana, int maxAtt, int maxHealth, int maxMana, int move, int range, String specDesc) {
-		this.name = new String(name);
+		this.name = name;
 		this.ID = id;
 		setMove(move);
 		setRange(range);

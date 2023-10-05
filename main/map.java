@@ -166,27 +166,36 @@ public class map {
    * Return: nothing
    */
   public boolean move(int id, int rowCoord, int colCoord, int limit) {
-	  if (isOnMap(id)) {
-	  if (isEmpty(rowCoord, colCoord)) {
-	  if (isLegalMove( id, rowCoord, colCoord, limit) == true) {
-		 int[] position = getPos(id);
-		 int originalCol = position[0];
-		 int originalRow = position[1];
-		 setPos(0, originalCol, originalRow);
-		 setPos(id, colCoord, rowCoord);
-	  	return true;}
-	  else {
-		  System.out.println("out of range move");
-		  return false;
+	  if (isOnMap(id))
+	  {
+		  if (isEmpty(rowCoord, colCoord))
+		  {
+			  if (isLegalMove( id, rowCoord, colCoord, limit) == true)
+			  {
+				 int[] position = getPos(id);
+				 int originalCol = position[0];
+				 int originalRow = position[1];
+				 setPos(0, originalCol, originalRow);
+				 setPos(id, colCoord, rowCoord);
+				return true;
+			  }
+			  else
+			  {
+				  System.out.println("out of range move");
+				  return false;
+			  }
+		  }
+		  else
+		  {
+			  System.out.println("place is not empty");
+				return false;
+		  }
 	  }
-	 } else {
-		 System.out.println("place is not empty");
-		  return false;
-	 	}
-	}else {
-		System.out.println("character is not on map");
-		  return false;
-	}
+	  else
+	  {
+			System.out.println("character is not on map");
+			return false;
+	  }
   }
   
   public int calDist(int col1, int row1,int col2,int row2) {
@@ -203,7 +212,7 @@ public class map {
    * Return: String representing map
    */
   
-  public String toString() {
+  public String PrintMap() {
 	  String toReturn="";
 	  for(int countRow = 0; countRow < row ; countRow++) {
 		  toReturn += "[";

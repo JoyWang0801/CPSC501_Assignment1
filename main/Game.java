@@ -100,7 +100,7 @@ public class Game {
 		while(playersAlive && enemiesAlive) {//the turn based part - while both teams are alive - each iteration is a turn
 			turnMana(players);//start of a new turn - add some mana
 			System.out.println("Turn: " + turnCounter + "\n");//display the current turn number
-			System.out.println(currentMap.toString());//display the map
+			System.out.println(currentMap.PrintMap());//display the map
 			printListOfChars(players, true);//display the state of the characters
 			printListOfChars(enemies, false);//display the state of enemies
 			if(playersAlive && enemiesAlive) {//if players are alive and have nemies to attack
@@ -144,7 +144,7 @@ public class Game {
 				killChecker(enemies, currentMap);
 				notAllMoved = playersDidntMove.size() > 0;
 				notAllActed = playersDidntAct.size() > 0;
-				System.out.println(currentMap.toString());
+				System.out.println(currentMap.PrintMap());
 				if(choice == 3) {
 					notAllMoved = false;
 					notAllActed = false;

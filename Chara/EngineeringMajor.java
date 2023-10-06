@@ -36,7 +36,7 @@ public class EngineeringMajor extends Character {
 		if (this.getID() == theMap.getID(xPos, yPos)) {
 			didSomething = false;
 			//if column
-		} else if (theMap.getPos(this.getID())[0] == xPos) {
+		} else if (col == xPos) {
 			//if above
 			for(int each = 0; each < enemies.size(); each++) {
 				int enemyId = enemies.get(each).getID();
@@ -48,7 +48,7 @@ public class EngineeringMajor extends Character {
 			}
 			didSomething = true;
 			//if row
-		} else if (theMap.getPos(this.getID())[1] == yPos) {
+		} else if (row == yPos) {
 			//if left
 			for(int each = 0; each < enemies.size(); each++) {
 				int enemyId = enemies.get(each).getID();

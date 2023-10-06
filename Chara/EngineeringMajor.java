@@ -34,34 +34,32 @@ public class EngineeringMajor extends Character {
 
 		//if same position as engineer return false
 		if (this.getID() == theMap.getID(xPos, yPos)) {
-			didSomething = false;
+			return false;
 			//if column
 		} else if (col == xPos) {
 			//if above
-			for(int each = 0; each < enemies.size(); each++) {
-				int enemyId = enemies.get(each).getID();
-				boolean isSameColumn = theMap.getPos(enemyId)[0] == col;
-				if(isSameColumn) {
-					attack(enemies.get(each));
-					System.out.println("I attacked");
-				}
-			}
+            for (Character enemy : enemies) {
+                int enemyId = enemy.getID();
+                boolean isSameColumn = theMap.getPos(enemyId)[0] == col;
+                if (isSameColumn) {
+                    attack(enemy);
+                    System.out.println("I attacked");
+                }
+            }
+			setMana(getMana() - 2);
 			didSomething = true;
 			//if row
 		} else if (row == yPos) {
 			//if left
-			for(int each = 0; each < enemies.size(); each++) {
-				int enemyId = enemies.get(each).getID();
-				boolean isSameRow = theMap.getPos(enemyId)[1] == row;
-				if(isSameRow) {
-					attack(enemies.get(each));
-				}
-			}
-			didSomething = true;
-		}
-
-		if (didSomething) {
+            for (Character enemy : enemies) {
+                int enemyId = enemy.getID();
+                boolean isSameRow = theMap.getPos(enemyId)[1] == row;
+                if (isSameRow) {
+                    attack(enemy);
+                }
+            }
 			setMana(getMana() - 2);
+			didSomething = true;
 		}
 		return didSomething;
 	}

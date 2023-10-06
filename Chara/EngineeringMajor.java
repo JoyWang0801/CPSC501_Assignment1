@@ -41,7 +41,10 @@ public class EngineeringMajor extends Character {
 
 			//if above
 			for(int each = 0; each < enemies.size(); each++) {
-				if(theMap.getPos(enemies.get(each).getID())[0] == col && theMap.getPos(enemies.get(each).getID())[1] < theMap.getPos(this.getID())[1]) {
+				int enemyId = enemies.get(each).getID();
+				boolean isSameColumn = theMap.getPos(enemyId)[0] == col;
+				boolean isAbove = theMap.getPos(enemyId)[1] < theMap.getPos(this.getID())[1];
+				if(isSameColumn && isAbove) {
 					attack(enemies.get(each));
 					System.out.println("I attacked");
 				}
@@ -49,7 +52,10 @@ public class EngineeringMajor extends Character {
 
 			//if below
 			for(int each = 0; each < enemies.size(); each++) {
-				if(theMap.getPos(enemies.get(each).getID())[0] == col && theMap.getPos(enemies.get(each).getID())[1] > theMap.getPos(this.getID())[1]) {
+				int enemyId = enemies.get(each).getID();
+				boolean isSameColumn = theMap.getPos(enemyId)[0] == col;
+				boolean isBelow = theMap.getPos(enemyId)[1] > theMap.getPos(this.getID())[1];
+				if(isSameColumn && isBelow) {
 					attack(enemies.get(each));
 				}
 			}
@@ -59,14 +65,20 @@ public class EngineeringMajor extends Character {
 
 			//if left
 			for(int each = 0; each < enemies.size(); each++) {
-				if(theMap.getPos(enemies.get(each).getID())[1] == row && theMap.getPos(enemies.get(each).getID())[0] < theMap.getPos(this.getID())[0]) {
+				int enemyId = enemies.get(each).getID();
+				boolean isSameRow = theMap.getPos(enemyId)[1] == row;
+				boolean isLeft = theMap.getPos(enemyId)[0] < theMap.getPos(this.getID())[0];
+				if(isSameRow && isLeft) {
 					attack(enemies.get(each));
 				}
 			}
 
 			//if right
 			for(int each = 0; each < enemies.size(); each++) {
-				if(theMap.getPos(enemies.get(each).getID())[1] == row && theMap.getPos(enemies.get(each).getID())[0] > theMap.getPos(this.getID())[0]) {
+				int enemyId = enemies.get(each).getID();
+				boolean isSameRow = theMap.getPos(enemyId)[1] == row;
+				boolean isRight = theMap.getPos(enemyId)[0] > theMap.getPos(this.getID())[0];
+				if(isSameRow && isRight) {
 					attack(enemies.get(each));
 				}
 			}

@@ -78,7 +78,7 @@ public class TestCharacterSpecial {
         }
         else
         {
-            assertFalse(current_character.getName() + " failed to perform special attack", true);
+            fail(current_character.getName() + " failed to perform special attack");
         }
 
         current_character.setMana(0);
@@ -106,7 +106,7 @@ public class TestCharacterSpecial {
         }
         else
         {
-            assertFalse(current_character.getName() + " failed to perform special attack", true);
+            fail(current_character.getName() + " failed to perform special attack");
         }
 
         current_character.setMana(0);
@@ -139,7 +139,7 @@ public class TestCharacterSpecial {
         }
         else
         {
-            assertFalse(current_character.getName() + " failed to perform special attack", true);
+            fail(current_character.getName() + " failed to perform special attack");
         }
 
         current_character.setMana(0);
@@ -173,7 +173,7 @@ public class TestCharacterSpecial {
         }
         else
         {
-            assertFalse(current_character.getName() + " failed to perform special attack", true);
+            fail(current_character.getName() + " failed to perform special attack");
         }
 
         current_character.setMana(0);
@@ -200,7 +200,7 @@ public class TestCharacterSpecial {
         }
         else
         {
-            assertFalse(current_character.getName() + " failed to perform special attack", true);
+            fail(current_character.getName() + " failed to perform special attack");
         }
 
         current_character.setMana(0);
@@ -228,7 +228,7 @@ public class TestCharacterSpecial {
         }
         else
         {
-            assertFalse(current_character.getName() + " failed to perform special attack", true);
+            fail(current_character.getName() + " failed to perform special attack");
         }
 
         current_character.setMana(0);
@@ -257,7 +257,7 @@ public class TestCharacterSpecial {
         }
         else
         {
-            assertFalse(current_character.getName() + " failed to perform special attack", true);
+            fail(current_character.getName() + " failed to perform special attack");
         }
 
         current_character.setMana(0);
@@ -282,7 +282,7 @@ public class TestCharacterSpecial {
         }
         else
         {
-            assertFalse(current_character.getName() + " failed to perform special attack", true);
+            fail(current_character.getName() + " failed to perform special attack");
         }
 
         current_character.setMana(0);

@@ -119,23 +119,26 @@ public class TestCharacterSpecial {
     {
         Character current_character = character_list.get(2);
         Character victim = enemy_list.get(0);
-        Character victim2 = enemy_list.get(0);
+        Character victim2 = enemy_list.get(1);
 
         int character_id = current_character.getID();
         m.setPos(character_id, 6, 6);
 
         int victim_xpos = m.getPos(character_id)[0] + 2;
         int victim_ypos = m.getPos(character_id)[1];
-        int new_health = victim.getHealth() - current_character.getAttack();
+        int victim_new_health = victim.getHealth() - current_character.getAttack();
+        int victim2_health = victim2.getHealth();
         m.setPos(victim.getID(), victim_xpos, victim_ypos);
         m.setPos(victim2.getID(), victim_xpos, victim_ypos + 2);
 
         boolean success = current_character.Special( victim_xpos, victim_ypos, game_status);
+        current_character.setMana(current_character.getMaxMana());
+        boolean success2 = current_character.Special( victim_xpos, victim_ypos + 2, game_status);
 
-        if(success)
+        if(success & !success2)
         {
-            assertEquals(new_health, victim.getHealth());
-            assertEquals(new_health, victim2.getHealth());
+            assertEquals(victim_new_health, victim.getHealth());
+            assertEquals(victim2_health, victim2.getHealth());
         }
         else
         {

@@ -27,7 +27,7 @@ super("Biomedical Major", id, 10, 250, 3, 10, 250, 7, 4, 1, "This special boosts
 		return true;
 	}
 
-	private int VerifyIdentityAndGetID(int xPos, int yPos, GameStatus gameStatus)
+	private int VerifyIdentityAndGetIndex(int xPos, int yPos, GameStatus gameStatus)
 	{
 		int choice = gameStatus.getCurrentMap().getID(xPos, yPos);
 		boolean isPlayer = false;
@@ -49,7 +49,7 @@ super("Biomedical Major", id, 10, 250, 3, 10, 250, 7, 4, 1, "This special boosts
 		boolean didSomething = false;
 		ArrayList<Character> players = gameStatus.getPlayers();
 		map theMap = gameStatus.getCurrentMap();
-		int playerIndex = VerifyIdentityAndGetID(xPos, yPos, gameStatus);
+		int playerIndex = VerifyIdentityAndGetIndex(xPos, yPos, gameStatus);
 		int playerID = players.get(playerIndex).getID();
 
 		if(playerIndex >= 0) {

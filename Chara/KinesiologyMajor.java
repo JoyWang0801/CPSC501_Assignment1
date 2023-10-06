@@ -21,7 +21,7 @@ public class KinesiologyMajor extends Character {
 		return true;
 	}
 
-	private int VerifyIdentityAndGetID(int xPos, int yPos, GameStatus gameStatus)
+	private int VerifyIdentityAndGetIndex(int xPos, int yPos, GameStatus gameStatus)
 	{
 		int choice = gameStatus.getCurrentMap().getID(xPos, yPos);
 		boolean isEnemy = false;
@@ -44,7 +44,7 @@ public class KinesiologyMajor extends Character {
 		boolean success = false;
 		map theMap = gameStatus.getCurrentMap();
 		ArrayList<Character> enemies = gameStatus.getEnemies();
-		int enemyIndex = VerifyIdentityAndGetID(xPos, yPos, gameStatus);
+		int enemyIndex = VerifyIdentityAndGetIndex(xPos, yPos, gameStatus);
 		int enemyID = enemies.get(enemyIndex).getID();
 		if(enemyIndex >= 0) {
 			int[] enemyPos = theMap.getPos(enemyID);

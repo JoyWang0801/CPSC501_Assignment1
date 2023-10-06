@@ -28,25 +28,27 @@ package Chara;
 			boolean didSomething = false;
 			map theMap = gameStatus.getCurrentMap();
 			ArrayList<Character> players = gameStatus.getPlayers();
+			int finalXPos = theMap.getPos(this.getID())[0];
+			int finalYPos = theMap.getPos(this.getID())[1];
+
 
 			for (int a = -1; a < 2; a++) {
 				for (int b = -1; b < 2; b++) {
-					int zoneX =   theMap.getPos(this.getID())[0] + a;
-					int zoneY =   theMap.getPos(this.getID())[1] + b;
-					int[] zone = new int[2];
-					zone[0] = zoneX;
-					zone[1] = zoneY;
+					int zoneX = finalXPos + a;
+					int zoneY = finalYPos + b;
 
 					/* this for loop checks if any player is in the spot being
 					 * checked and attacks them three times if it is */
-
-					for(int i = 0; i <   players.size(); i++) {
-						if((theMap.getPos(players.get(i).getID())[0] == zone[0]) && (theMap.getPos(players.get(i).getID())[1] == zone[1])) {
-							attack(players.get(i));
-							attack(players.get(i));
-							attack(players.get(i));
-						}
-					}
+                    for (Character player : players) {
+                        int playerId = player.getID();
+                        int playerXPos = theMap.getPos(playerId)[0];
+						int playerYPos = theMap.getPos(playerId)[1];
+                        if ((playerXPos == zoneX) && (playerYPos == zoneY)) {
+                            attack(player);
+                            attack(player);
+                            attack(player);
+                        }
+                    }
 				}
 			}
 			setMana(getMana() - 3);

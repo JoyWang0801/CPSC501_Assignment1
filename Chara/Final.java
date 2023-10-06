@@ -25,7 +25,6 @@ package Chara;
 		@Override
 		protected boolean DoSpecialAttack(int xPos, int yPos, GameStatus gameStatus) {
 			//these two for loops check each spot around the final
-			boolean didSomething = false;
 			map theMap = gameStatus.getCurrentMap();
 			ArrayList<Character> players = gameStatus.getPlayers();
 			int finalXPos = theMap.getPos(this.getID())[0];
